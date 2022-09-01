@@ -6,7 +6,7 @@
 
 <mapper namespace="com.ming.project.donggram.user.dao.UserDAO">
 
-	<insert id="insertuser" parameterType="map">
+	<insert id="insertUser" parameterType="map">
 	
 		INSERT INTO
 			`user`
@@ -41,4 +41,26 @@
 			`loginId` = #{loginId}	
 		
 	</select>
+	
+	
+	<select id="selectUser" parameterType="map"
+	resultType="com.ming.project.donggram.user.model.User">
+	
+		SELECT
+			`id`
+			, `loginId`
+			, `password`
+			, `name`
+			, `email`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`user`
+		WHERE
+			`loginId` = #{loginId}
+			AND `password` = #{loginPw}	
+			
+	</select>
+	
+	
 </mapper> 
