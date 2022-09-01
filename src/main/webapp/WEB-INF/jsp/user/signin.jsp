@@ -22,7 +22,7 @@
 </head>
 <body>
 
-	<div class="container bg-warning">
+	<div class="container">
 		
 		<section class="contents d-flex">
 			<img alt="로그인 화면 메인 이미지" src="/static/img/login-main-img.png" class="m-4" width="400">
@@ -31,11 +31,13 @@
 				<div class="login border mb-4">
 					<div class="m-4">
 						<c:import url="/WEB-INF/jsp/include/main-header.jsp"/>
-						
-						<input type="text" class="form-control mt-4" placeholder="아이디">
-						<input type="password" class="form-control mt-3" placeholder="비밀번호">
-						<button class="btn btn-secondary btn-block mt-3">login</button>	
-						<br>
+
+						<form id="loginForm">
+							<input type="text" class="form-control mt-4" placeholder="아이디" id="loginIdInput">
+							<input type="password" class="form-control mt-3" placeholder="비밀번호" id="pwInput">
+							<button type="submit" class="btn btn-secondary btn-block mt-3">login</button>	
+							<br>
+						</form>
 						<hr>
 						<br>
 						<div class="d-flex justify-content-around">
@@ -59,6 +61,50 @@
 		<c:import url="/WEB-INF/jsp/include/footer.jsp" />
 	
 	</div>
+	
+	<script>
+	
+		$(document).ready(function() {
+			
+			$("#loginForm").on("submit", function(e) {
+				
+				e.preventDefault();
+				
+				let loginId = $("#loginIdInput").val();
+				let password = $("#pwInput").val();
+				
+				// validation
+				
+				if (loginId == "") {
+					alert("아이디를 입력하세요");
+					return ;
+				}
+				
+				if (password == "") {
+					alert("비밀번호를 입력하세요");
+					return ;
+				}
+				
+				$.ajax({
+					type:"post"
+					, url:"/user/signin"
+					, data:{"loginId":loginId, "loginPw":password}
+					, success:function(data) {
+						if (data.result == "success") {
+							alert("로그인 성공");
+							location.href = "/post/timeline/view";
+						} else {
+							alert("로그인 실패");
+						}
+					}
+					, eror:function() {
+						alert("로그인 에러");
+					}
+				});
+				
+			})
+		});
+	</script>
 	
 </body>
 </html>
