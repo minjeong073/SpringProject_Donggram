@@ -78,6 +78,17 @@
 			// 아이디 중복 확인 - 상태 저장
 			var isDuplicate = true;
 			
+			<%-- 아이디 변경 시 중복 확인 초기화 --%>
+			$("input").on("propertychange change keyup paste input", function() {
+				
+				isCheck = false;
+				isDuplicate = true;
+				
+				$("#duplicateId").addClass("d-none");
+				$("#possibleId").addClass("d-none");
+				
+			});
+			
 			<%-- 아이디 중복 확인 --%>
 			$("#duplicateBtn").on("click", function() {
 				
@@ -107,7 +118,7 @@
 						} else {	// 중복 아닐 경우
 							isDuplicate = false;
 							$("#duplicateId").addClass("d-none");
-							$("possibleId").removeClass("d-none");
+							$("#possibleId").removeClass("d-none");
 						}
 					}
 					, error:function() {
@@ -174,6 +185,7 @@
 					, data:{"loginId":loginId, "password":password, "name":name, "email":email}
 					, success:function(data) {
 						if (data.result == "success") {
+							alert("회원가입이 완료되었습니다");
 							location.href="/user/signin/view";
 						} else {
 							alert("회원가입 실패");
