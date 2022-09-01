@@ -25,22 +25,40 @@
 	<div class="container">
 		
 		<section class="contents d-flex justify-content-center">
-			<div class="join-box my-4 border">
-				<div class="m-4">
-					<c:import url="/WEB-INF/jsp/include/main-header.jsp"/>
+			<div class="content-box my-4 d-flex flex-column justify-content-center">
+				<div class="signup mb-4 border">
 					
-					<div class="d-flex mt-3">
-						<input type="text" class="form-control mt-3" placeholder="아이디">
-						<button class="btn btn-sm btn-outline-secondary mx-3">중복확인</button>				
+					<div class="m-4">
+						<c:import url="/WEB-INF/jsp/include/main-header.jsp"/>
+						<div class="mt-3">
+							<div class="d-flex input-group">
+								<input type="text" class="form-control mt-3" placeholder="아이디">
+								<span class="input-group-btn mt-4">
+									<button type="button" class="btn btn-sm btn-outline-secondary mx-3">중복확인</button>												
+								</span>
+							</div>
+							<input type="password" class="form-control mt-3" placeholder="비밀번호">
+							<input type="password" class="form-control mt-3" placeholder="비밀번호 확인">
+							<input type="text" class="form-control mt-3" placeholder="사용자 이름">
+							<input type="text" class="form-control mt-3" placeholder="이메일">
+							
+							<button type="button" id="signupBtn" class="btn btn-primary btn-block text-white mt-3">가입하기</button>					
+						
+						</div><!-- form -->
 					</div>
-					<input type="password" class="form-control mt-3" placeholder="비밀번호">
-					<input type="password" class="form-control mt-3" placeholder="비밀번호 확인">
-					<input type="text" class="form-control mt-3" placeholder="사용자 이름">
-					<input type="text" class="form-control mt-3" placeholder="이메일">
-					
-					<button class="btn btn-primary btn-block text-white mt-3">가입하기</button>					
-				</div>
+									
+				</div><!-- signup -->
+				
+				
+				<div class="signup border">
+					<div class="d-flex m-4 justify-content-around">
+						<span>계정이 있으신가요?</span>
+						<span><a href="/user/signin/view">로그인하기</a></span>
+					</div>
+				</div> <!-- signin -->
+				
 			</div>
+			
 		
 		</section>
 		
@@ -48,6 +66,16 @@
 	
 	</div>
 	
+	<script>
+		
+		$(document).ready(function() {
+			
+			$("#signupBtn").on("click", function() {
+				
+			});
+		})
+		
+	</script>
 
 </body>
 </html>
