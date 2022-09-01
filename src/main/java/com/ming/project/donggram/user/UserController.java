@@ -17,4 +17,14 @@ public class UserController {
 	public String signinView() {
 		return "user/signin";
 	}
+	
+	@GetMapping("/signin/findId/view")
+	public String findIdView() {
+		return "user/findId";
+	}
+	
+	@GetMapping("/signin/findPw/view")
+	public String findPwView() {
+		return "user/findPw";
+	}
 }
