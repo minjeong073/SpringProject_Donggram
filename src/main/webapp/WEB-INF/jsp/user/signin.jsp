@@ -22,32 +22,32 @@
 </head>
 <body>
 
-	<div class="container">
+	<div class="container bg-warning">
 		
-		<section class="contents d-flex justify-content-center">
+		<section class="contents d-flex">
 			<img alt="로그인 화면 메인 이미지" src="/static/img/login-main-img.png" class="m-4" width="400">
 			
-			<div class="join-box my-4">
+			<div class="content-box my-4 d-flex flex-column justify-content-center">
 				<div class="login border mb-4">
 					<div class="m-4">
 						<c:import url="/WEB-INF/jsp/include/main-header.jsp"/>
 						
 						<input type="text" class="form-control mt-4" placeholder="아이디">
 						<input type="password" class="form-control mt-3" placeholder="비밀번호">
-						<button class="btn btn-secondary btn-block my-3">login</button>	
+						<button class="btn btn-secondary btn-block mt-3">login</button>	
 						<br>
 						<hr>
 						<br>
-						<div class="d-flex justify-content-between">
-							<a>아이디 찾기</a>
-							<a>비밀번호 찾기</a>
+						<div class="d-flex justify-content-around">
+							<a href="/user/signin/findId/view">아이디 찾기</a>
+							<a href="/user/signin/findPw/view">비밀번호 찾기</a>
 						</div>
 						
 					</div>
 				</div> <!-- login -->
 				
 				<div class="signup border">
-					<div class="d-flex m-4">
+					<div class="d-flex m-4 justify-content-around">
 						<span>계정이 없으신가요?</span>
 						<span><a href="/user/signup/view">가입하기</a></span>
 					</div>
