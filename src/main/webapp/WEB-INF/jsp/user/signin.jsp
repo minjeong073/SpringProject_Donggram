@@ -22,7 +22,8 @@
 </head>
 <body>
 
-	<div class="container">
+	<div class="container d-flex flex-column align-items-center">
+		<header></header>
 		
 		<section class="contents d-flex">
 			<img alt="로그인 화면 메인 이미지" src="/static/img/login-main-img.png" class="m-4" width="400">

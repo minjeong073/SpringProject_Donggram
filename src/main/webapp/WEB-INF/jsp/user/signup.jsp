@@ -22,7 +22,8 @@
 </head>
 <body>
 	
-	<div class="container">
+	<div class="container d-flex flex-column align-items-center">
+		<header></header>
 		
 		<section class="contents d-flex justify-content-center">
 			<div class="content-box my-4 d-flex flex-column justify-content-center">

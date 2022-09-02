@@ -7,15 +7,44 @@
 	font-family: 'Jua', sans-serif;
 	font-family: 'Libre Baskerville', serif;
 */
+#wrap {
+	width: 1200px;
+	margin: auto;
+}
 
 header {
 	height: 70px;
-	width: 800px;
+	width: auto;
+}
+
+header > #searchBox {
+	width: 400px;
 }
 
 .main-header {
+	width: 300px;
 	font-family: 'EB Garamond', serif;
 }
+
+.main-header > a {
+	text-decoration: none;
+	color: black;
+}
+
+a:hover {
+	color: gray;
+	text-decoration: none;
+}
+
+nav {
+	width: 300px;
+}
+
+.nav-item > a {
+	text-decoration: none;
+	color: black;
+}
+
 
 .contents {
 	width: 800px;
@@ -23,6 +52,25 @@ header {
 
 .contents > .content-box {
 	width: 400px;
+}
+
+.contents > .feed {
+	width: 700px;
+}
+
+.feed > .user_info {
+	width: 700px;
+	height: 200px;
+}
+
+.feed > .feed_img {
+	width: 700px;
+	height: 500px;
+}
+
+.feed > .feed_info {
+	width: 700px;
+	height: 200px;
 }
 
 footer {
