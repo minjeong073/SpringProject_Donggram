@@ -31,19 +31,24 @@ header > #searchBox {
 	color: black;
 }
 
+header > .userInfo {
+	width: 100px;
+}
+
 a:hover {
 	color: gray;
 	text-decoration: none;
 }
 
 nav {
-	width: 300px;
+	width: 200px;
 }
 
 .nav-item > a {
 	text-decoration: none;
 	color: black;
 }
+
 
 
 .contents {
@@ -58,19 +63,23 @@ nav {
 	width: 700px;
 }
 
-.feed > .user_info {
+.feed > .user-info-box {
 	width: 700px;
-	height: 200px;
+	height: 80px;
 }
 
-.feed > .feed_img {
+.feed > .feed-img-box {
 	width: 700px;
-	height: 500px;
+	height: 600px;
 }
 
-.feed > .feed_info {
+.feed > .feed-info-box {
 	width: 700px;
-	height: 200px;
+	height: 220px;
+}
+
+.textMoreBtn:hover {
+	text-decoration: none;
 }
 
 footer {
