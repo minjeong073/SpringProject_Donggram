@@ -22,11 +22,11 @@
 </head>
 <body>
 
-	<div class="container">
+	<div class="container d-flex flex-column align-items-center my-5">
 
-		<section class="contents d-flex justify-content-center ">
-			<div class="my-4  w-25">
-				<div class="">
+		<section class="contents d-flex justify-content-around">
+			<div class="my-4 w-25">
+				<div>
 					<button class="btn btn-outline-secondary" onclick="history.go(-1)">
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-left" viewBox="0 0 16 16">
 						  <path d="M10 12.796V3.204L4.519 8 10 12.796zm-.659.753-5.48-4.796a1 1 0 0 1 0-1.506l5.48-4.796A1 1 0 0 1 11 3.204v9.592a1 1 0 0 1-1.659.753z"/>
@@ -40,7 +40,7 @@
 			<div class="content-box my-4">
 				<div class="find-pw mb-4 border">
 					<div class="m-4">
-						<c:import url="/WEB-INF/jsp/include/main-header.jsp"/>
+						<c:import url="/WEB-INF/jsp/include/header-title.jsp"/>
 						
 						<input type="text" class="form-control mt-3" placeholder="아이디">
 						<input type="text" class="form-control mt-3" placeholder="이메일">
@@ -51,9 +51,13 @@
 			
 			</div>
 			
+			<div class="w-25">
+				
+			</div>
+			
 		</section>
 
-			<c:import url="/WEB-INF/jsp/include/footer.jsp" />
+		<c:import url="/WEB-INF/jsp/include/footer.jsp" />
 
 		
 	</div>

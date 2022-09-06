@@ -22,7 +22,7 @@
 </head>
 <body>
 	
-	<c:import url="/WEB-INF/jsp/include/header.jsp"/>	
+	<c:import url="/WEB-INF/jsp/include/timeline-header.jsp"/>	
 	
 	<div class="container d-flex flex-column align-items-center">
 		

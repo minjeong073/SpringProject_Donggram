@@ -49,7 +49,7 @@ nav {
 	color: black;
 }
 
-
+section
 
 .contents {
 	width: 800px;
@@ -81,6 +81,16 @@ nav {
 .textMoreBtn:hover {
 	text-decoration: none;
 }
+
+.contents > #postImg {
+	width: 400px;
+	height: 400px;
+}
+
+.postBox {
+	width: 1000px;
+}
+
 
 footer {
 	height: 70px;

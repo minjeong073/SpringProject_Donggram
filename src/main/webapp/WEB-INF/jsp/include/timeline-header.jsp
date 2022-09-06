@@ -7,7 +7,7 @@
 
 		<header class="d-flex justify-content-around align-items-center">
 			
-			<c:import url="/WEB-INF/jsp/include/post-main-header.jsp"/>
+			<c:import url="/WEB-INF/jsp/include/header-title.jsp"/>
 			
 			<div id="searchBox" class="d-flex input-group m-3">
 				<button class="searhc-img input-group-text">
