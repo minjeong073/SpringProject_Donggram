@@ -31,7 +31,9 @@
 			<div class="content-box my-4 d-flex flex-column justify-content-center">
 				<div class="login border mb-4">
 					<div class="m-4">
-						<c:import url="/WEB-INF/jsp/include/header-title.jsp"/>
+						<div class="d-flex justify-content-center">
+							<c:import url="/WEB-INF/jsp/include/header-title.jsp"/>
+						</div>
 
 						<form id="loginForm">
 							<input type="text" class="form-control mt-4" placeholder="아이디" id="loginIdInput">

@@ -30,7 +30,9 @@
 				<div class="signup mb-4 border">
 					
 					<div class="m-4">
-						<c:import url="/WEB-INF/jsp/include/header-title.jsp"/>
+						<div class="d-flex justify-content-center">
+							<c:import url="/WEB-INF/jsp/include/header-title.jsp"/>
+						</div>
 						<div class="mt-3">
 							<div class="d-flex input-group">
 								<input type="text" class="form-control mt-3" placeholder="아이디" id="loginIdInput">

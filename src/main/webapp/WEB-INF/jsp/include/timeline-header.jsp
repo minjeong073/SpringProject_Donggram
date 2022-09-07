@@ -5,7 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 
-		<header class="d-flex justify-content-around align-items-center">
+		<header class="d-flex justify-content-around align-items-center border-bottom">
 			
 			<c:import url="/WEB-INF/jsp/include/header-title.jsp"/>
 			
