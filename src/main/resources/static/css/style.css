@@ -21,12 +21,12 @@ header > #searchBox {
 	width: 400px;
 }
 
-.main-header {
+.header-title {
 	width: 300px;
 	font-family: 'EB Garamond', serif;
 }
 
-.main-header > a {
+.header-title > a {
 	text-decoration: none;
 	color: black;
 }
@@ -48,6 +48,7 @@ nav {
 	text-decoration: none;
 	color: black;
 }
+
 
 section
 
@@ -82,14 +83,51 @@ section
 	text-decoration: none;
 }
 
-.contents > #postImg {
-	width: 400px;
-	height: 400px;
+#banner {
+	width: 50px;
+	height: 100px;
+	
+	background-color: white;
+	z-index: 9999;
+	position: fixed;
 }
 
+
 .postBox {
-	width: 1000px;
+	width: 1200px;
 }
+
+.postBox > #postImgBox {
+	width: 600px;
+}
+
+#postImgBox  #postImgDiv {
+	width: 500px;
+	height: 500px;
+}
+
+.postImg {
+	width: 500px;
+	height: 500px;
+	object-fit: scale-down;
+}
+
+.postBox > #postContent {
+	width: 600px;
+}
+
+#postContent .tagBox {
+	background-color: #D0D0D0;
+	border-radius: 8px;
+}
+
+
+.tagBtn:hover {
+	background-color: none;
+	text-decoration: none;
+}
+
+
 
 
 footer {

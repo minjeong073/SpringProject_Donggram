@@ -18,51 +18,53 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 	<link rel="stylesheet" href="/static/css/style.css" type="text/css" >
-
+	
+<!-- bootstrap icon -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 </head>
 <body>
+	<c:import url="/WEB-INF/jsp/include/create-header.jsp"/>
 	
-	<div class="container">
-	
-		<header></header>
+	<div class="container d-flex flex-column align-items-center my-3">
 		
-		<section class="postBox d-flex bg-danger justify-content-center">
+		<section class="postBox d-flex justify-content-center">
 			
-			<div id="postImgBox" class="bg-info d-flex flex-column align-items-center">
-				
-				<img id="postImg" alt="게시물 사진" src="/static/img/Sienna-Palette-title-1128x640.jpg" width="360">
-				<input type="file">
+			<div id="postImgBox" class=" d-flex flex-column justify-content-center align-items-center">
+				<div class="my-4">
+					<div id="postImgDiv" class="border d-flex justify-content-center align-items-center my-3">
+						<div>
+							<!-- <img alt="게시물 사진" src="/static/img/photographer-407068_960_720.jpg" class="w-100"> -->
+						</div>
+					</div>	
+					<input type="file">
+				</div>
 				
 			</div>
 			
-			<div id="postContent" class="bg-warning border d-flex">
+			<div id="postContent" class=" border d-flex justify-content-center">
 			
-				<div class="m-4">				
-					<div id="postTextBox" class="bg-danger">
-						<input type="text" placeholder="문구 입력 ...">
+				<div class="my-4 col-11">				
+					<div id="postTextBox" class=" my-3">
+						<textarea class="w-100 tagBox" rows="10" placeholder="문구 입력 ..."></textarea>
 					</div>
 					
-					<div id="userTagBox" class="bg-primary d-flex">
-						<div>사람 태그하기</div>
-						<button> &gt; </button>
+					<div id="userTagBox" class="tagBox border d-flex justify-content-between align-items-center mb-3">
+						<div class="ml-4">사람 태그하기</div>
+						<button class="tagBtn btn btn-link mr-4 text-dark"><h5>&gt;</h5></button>
 					</div>
 					
-					<div id="locationBox" class="bg-info d-flex">
-						<div>위치 추가</div>
-						<button> &gt; </button>
+					<div id="locationBox" class="tagBox border d-flex justify-content-between align-items-center">
+						<div class="ml-4">위치 추가</div>
+						<button class="tagBtn btn btn-link mr-4 text-dark"><h5>&gt;</h5></button>
 					</div>
 				</div>
 			
 				
-			</div>
+			</div><!-- postContent -->
 			
 		</section>
 		
-		
-	
 	</div>
-	
-	
 	
 </body>
 </html>
