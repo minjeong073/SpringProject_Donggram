@@ -104,7 +104,9 @@ section
 #postImgBox  #postImgDiv {
 	width: 500px;
 	height: 500px;
+	background-color: #D0D0D0;
 }
+
 
 .postImg {
 	width: 500px;

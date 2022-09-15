@@ -37,8 +37,13 @@ public class UserController {
 		HttpSession session = req.getSession();
 		
 		session.removeAttribute("userId");
-		session.removeAttribute("userName");
+		session.removeAttribute("userLoginId");
 		
 		return "redirect:/user/signin/view";
+	}
+	
+	@GetMapping("/feed/view")
+	public String feedView() {
+		return "user/feed";
 	}
 }

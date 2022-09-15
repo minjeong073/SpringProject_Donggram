@@ -69,8 +69,8 @@ public class UserRestController {
 			// session 에 로그인한 사용자 정보 저장
 			HttpSession session = req.getSession();
 			
-			session.setAttribute("userId", user.getLoginId());
-			session.setAttribute("userName", user.getName());
+			session.setAttribute("userId", user.getId());
+			session.setAttribute("userLoginId", user.getLoginId());
 		} else {
 			result.put("result", "fail");
 		}

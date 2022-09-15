@@ -23,7 +23,29 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 </head>
 <body>
-	<c:import url="/WEB-INF/jsp/include/create-header.jsp"/>
+	
+	<header class=" d-flex justify-content-around align-items-center border-bottom">
+		<div class="w-25 ">
+			<div class="text-center">
+				<button class="btn btn-link" onclick="history.go(-1)">
+					<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="black" class="bi bi-chevron-left" viewBox="0 0 16 16">
+					  <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+					</svg>
+				</button>
+			</div>
+		</div><!-- 이전 버튼 -->
+		
+		<div class="text-center display-4 w-50">
+			새 게시물
+		</div>
+		
+		<div class=" w-25">
+			<div class="text-center">
+				<button id="shareBtn" class="btn btn-link"><h3>공유</h3></button>
+			</div>
+		</div>
+		
+	</header>
 	
 	<div class="container d-flex flex-column align-items-center my-3">
 		
@@ -33,10 +55,10 @@
 				<div class="my-4">
 					<div id="postImgDiv" class="border d-flex justify-content-center align-items-center my-3">
 						<div>
-							<!-- <img alt="게시물 사진" src="/static/img/photographer-407068_960_720.jpg" class="w-100"> -->
+							<!-- TODO : file 입력한 값 보여주기 (여러장?) -->
 						</div>
 					</div>	
-					<input type="file">
+					<input type="file" id="fileInput">
 				</div>
 				
 			</div>
@@ -45,17 +67,17 @@
 			
 				<div class="my-4 col-11">				
 					<div id="postTextBox" class=" my-3">
-						<textarea class="w-100 tagBox" rows="10" placeholder="문구 입력 ..."></textarea>
+						<textarea id="contentInput" class="w-100 tagBox" rows="10" placeholder="문구 입력 ..."></textarea>
 					</div>
 					
 					<div id="userTagBox" class="tagBox border d-flex justify-content-between align-items-center mb-3">
 						<div class="ml-4">사람 태그하기</div>
-						<button class="tagBtn btn btn-link mr-4 text-dark"><h5>&gt;</h5></button>
+						<!-- TODO : 태그 팝업 --><button class="tagBtn btn btn-link mr-4 text-dark"><h5>&gt;</h5></button>
 					</div>
 					
 					<div id="locationBox" class="tagBox border d-flex justify-content-between align-items-center">
 						<div class="ml-4">위치 추가</div>
-						<button class="tagBtn btn btn-link mr-4 text-dark"><h5>&gt;</h5></button>
+						<!-- TODO : 위치 추가 팝업 --><button class="tagBtn btn btn-link mr-4 text-dark"><h5>&gt;</h5></button>
 					</div>
 				</div>
 			
@@ -65,6 +87,57 @@
 		</section>
 		
 	</div>
+	
+	<script>
+	
+		$(document).ready(function() {
+			
+			$("#shareBtn").on("click", function() {
+				
+				let file = $("#fileInput").val();
+				let content = $("#contentInput").val();
+				
+				// validation
+				
+				if (file == "") {
+					alert("사진을 추가하세요");
+					return ;
+				}
+				
+				if (content == "") {
+					alert("게시물 내용을 입력하세요");
+					return ;
+				}
+				
+				
+				var formData = new FormData();
+				formData.append("content", content);
+				// 파일 하나만 (나중에 여러개 업로드 수정)
+				formData.append("file", $("#fileInput")[0].files[0]);
+				
+				
+				$.ajax({
+					type:"post"
+					, url:"/post/create"
+					, data:formData
+					, enctype:"multipart/form-data"
+					, processData:false
+					, contentType:false
+					, success:function(data) {
+						if (data.result == "success") {
+							location.href = "/post/timeline/view";
+						} else {
+							alert("게시물 공유 실패");
+						}
+					}
+					, error:function() {
+						alert("게시물 공유 에러");
+					}
+				});
+			});
+		});
+	
+	</script>
 	
 </body>
 </html>

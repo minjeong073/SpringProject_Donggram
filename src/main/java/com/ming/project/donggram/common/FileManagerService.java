@@ -15,7 +15,7 @@ public class FileManagerService {
 	public static String saveFile(int userId, MultipartFile file) {
 		
 		// FILE_UPLOAD_PATH 밑에 directory 생성
-		String directoryName = "/" + userId + "_" + System.currentTimeMillis();
+		String directoryName = "/" + userId + "_" + System.currentTimeMillis() + "/";
 		
 		String filePath = FILE_UPLOAD_PATH + directoryName;
 		
