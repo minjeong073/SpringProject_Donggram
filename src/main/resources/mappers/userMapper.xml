@@ -62,5 +62,23 @@
 			
 	</select>
 	
+	<select id="selectUserId" parameterType="map"
+	resultType="com.ming.project.donggram.user.model.User">
+	
+		SELECT
+			`id`
+			, `loginId`
+			, `password`
+			, `name`
+			, `email`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`user`
+		WHERE
+			`name` = #{name}
+			AND `email` = #{email}
+	
+	</select>
 	
 </mapper> 

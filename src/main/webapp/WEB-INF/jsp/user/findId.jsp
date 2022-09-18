@@ -27,7 +27,7 @@
 		<section class="contents d-flex justify-content-around">
 			<div class="my-4 w-25">
 				<div>
-					<button class="btn btn-outline-secondary" onclick="history.go(-1)">
+					<button class="btn btn-link float-right" onclick="history.go(-1)">
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-left" viewBox="0 0 16 16">
 						  <path d="M10 12.796V3.204L4.519 8 10 12.796zm-.659.753-5.48-4.796a1 1 0 0 1 0-1.506l5.48-4.796A1 1 0 0 1 11 3.204v9.592a1 1 0 0 1-1.659.753z"/>
 						</svg>
@@ -42,8 +42,8 @@
 					<div class="m-4">
 						<c:import url="/WEB-INF/jsp/include/header-title.jsp"/>
 						
-						<input type="text" class="form-control mt-3" placeholder="사용자 이름">
-						<input type="text" class="form-control mt-3" placeholder="이메일">
+						<input type="text" class="form-control mt-3" placeholder="사용자 이름" id="nameInput">
+						<input type="text" class="form-control mt-3" placeholder="이메일" id="emailInput">
 						
 						<button type="button" id="findBtn" class="btn btn-primary btn-block text-white mt-3">아이디 찾기</button>					
 					</div>
@@ -61,6 +61,50 @@
 
 		
 	</div>
+	
+	<script>
+	
+		$(document).ready(function() {
+		
+			$("#findBtn").on("click", function() {
+				
+				let name = $("#nameInput").val();
+				let email = $("#emailInput").val();
+				
+				
+				// validation
+				
+				if (name == "") {
+					alert("이름을 입력하세요");
+					return ;
+				}
+				
+				if (email == "") {
+					alert("이메일을 입력하세요");
+					return ;
+				}
+				
+				
+				$.ajax({
+					type:"post"
+					, url:"/user/signin/findId"
+					, data:{"name":name, "email":email}
+					, success:function(data) {
+						if (data.result) {
+							alert("아이디는 " + data.user.loginId + " 입니다");
+						} else {
+							alert("존재하지 않는 사용자 입니다");
+						}
+					}
+					, error:function() {
+						alert("아이디 찾기 에러");
+					}
+				});
+				
+			});
+		});
+		
+	</script>
 	
 </body>
 </html>

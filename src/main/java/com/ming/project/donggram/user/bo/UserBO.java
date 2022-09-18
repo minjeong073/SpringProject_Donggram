@@ -37,4 +37,8 @@ public class UserBO {
 		return userDAO.selectUser(loginId, encryptPassword);
 	}
 	
+	// 아이디 찾기
+	public User getUserId(String name, String email) {
+		return userDAO.selectUserId(name, email);
+	}
 }
