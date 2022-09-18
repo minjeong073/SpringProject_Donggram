@@ -55,7 +55,7 @@
 				<div class="my-4">
 					<div id="postImgDiv" class="border d-flex justify-content-center align-items-center my-3">
 						<div>
-							<!-- TODO : file 입력한 값 보여주기 (여러장?) -->
+							<img id="preview" src="" class="w-100 h-100">
 						</div>
 					</div>	
 					<input type="file" id="fileInput">
@@ -135,6 +135,17 @@
 					}
 				});
 			});
+			
+			$("#fileInput").change(function() {
+				if (this.files && this.files[0]) {
+					var reader = new FileReader();
+					
+					reader.onload = function(e) {
+						$("#preview").attr('src', e.target.result);
+					}
+					reader.readAsDataURL(this.files[0]);
+				}
+			})
 		});
 	
 	</script>
