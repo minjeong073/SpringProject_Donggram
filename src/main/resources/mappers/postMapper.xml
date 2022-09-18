@@ -27,5 +27,20 @@
 		)
 		
 	</insert>
+	
+	<select id="selectPostUser" parameterType="int" resultType="object">
+	
+		SELECT
+			P.id, P.imagePath, P.contents, U.loginId, U.name
+		FROM
+			`post` AS `P`
+		JOIN
+			`user` AS `U`
+		ON
+			P.userId = U.id
+		WHERE
+			P.userId = #{userId}
+			
+	</select>
 
 </mapper>

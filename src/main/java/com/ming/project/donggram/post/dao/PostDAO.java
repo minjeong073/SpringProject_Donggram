@@ -1,7 +1,11 @@
 package com.ming.project.donggram.post.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import com.ming.project.donggram.post.model.PostUser;
 
 @Repository
 public interface PostDAO {
@@ -10,5 +14,8 @@ public interface PostDAO {
 			@Param("userId") int userId
 			, @Param("content") String content
 			, @Param("imagePath") String imagePath);
+
+	public List<Object> selectPostUser(
+			@Param("userId") int userId);
 	
 }

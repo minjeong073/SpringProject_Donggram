@@ -1,5 +1,11 @@
 package com.ming.project.donggram.post.bo;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -30,6 +36,28 @@ public class PostBO {
 		}
 		
 		return postDAO.insertPost(userId, content, imagePath);
+	}
+	
+	// 타임라인 게시물 불러오기
+	public List<Map<String, Object>> getPostUser(int userId) {
+		
+		Map<String, Object> map = new HashMap<>();
+		List<Map<String, Object>> list = new ArrayList<>();
+
+		List<Object> obj = postDAO.selectPostUser(userId);
+		Iterator<Object> iter = obj.iterator();
+		
+		while(iter.hasNext()) {
+			map.put("id", obj.get(0));
+			map.put("imagePath", obj.get(1));
+			map.put("contents", obj.get(2));
+			map.put("userId", obj.get(3));
+			map.put("name", obj.get(4));
+			list.add(map);
+		}
+		
+		
+		return list;
 	}
 	
 }
