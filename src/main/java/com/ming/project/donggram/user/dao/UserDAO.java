@@ -24,4 +24,6 @@ public interface UserDAO {
 			@Param("name") String name
 			, @Param("email") String email);
 	
+	public User selectUserById(@Param("id") int id);
+	
 }

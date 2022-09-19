@@ -1,37 +1,31 @@
 package com.ming.project.donggram.post;
 
 import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ming.project.donggram.post.bo.PostBO;
+import com.ming.project.donggram.post.model.Post;
+import com.ming.project.donggram.post.model.PostDetail;
 
 @Controller
 @RequestMapping("/post")
 public class PostController {
-
+	
 	@Autowired
 	private PostBO postBO;
-	
+
 	@GetMapping("/timeline/view")
-	public String timelineView(
-			HttpServletRequest req
-			, Model model) {
+	public String timelineView(Model model) {
 		
-		HttpSession session = req.getSession();
+		List<PostDetail> postDetailList = postBO.getPostList();
 		
-		int userId = (Integer) session.getAttribute("userId");
-		
-		List<Map<String, Object>> postUserList = postBO.getPostUser(userId);
-		model.addAttribute("postUserList", postUserList);
+		model.addAttribute("postDetailList", postDetailList);
 		
 		return "post/timeline";
 	}
@@ -39,5 +33,17 @@ public class PostController {
 	@GetMapping("/create/view")
 	public String postCreateView() {
 		return "post/create";
+	}
+	
+	@GetMapping("/detail/view")
+	public String postDetailView(
+			@RequestParam("id") int id
+			, Model model) {
+		
+		Post post = postBO.getPostById(id);
+		
+		model.addAttribute("post", post);
+		
+		return "post/detail";
 	}
 }

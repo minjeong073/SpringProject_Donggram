@@ -42,5 +42,41 @@
 			P.userId = #{userId}
 			
 	</select>
+	
+	<!-- 게시물 보기 -->
+	<select id="selectPostById" parameterType="int"
+	resultType="com.ming.project.donggram.post.model.Post">
+	
+		SELECT
+			`id`
+			, `userId`
+			, `imagePath`
+			, `contents`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`post`
+		WHERE
+			`id` = #{id}
+	
+	</select>
+	
+	<!-- 타임라인에 post 가져오기 -->
+	<select id="selectPostList" resultType="com.ming.project.donggram.post.model.Post">
+	
+		SELECT
+			`id`
+			, `userId`
+			, `imagePath`
+			, `contents`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`post`
+		ORDER BY
+			`id` DESC
+		
+		
+	</select>
 
 </mapper>

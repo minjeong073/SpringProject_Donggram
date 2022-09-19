@@ -41,4 +41,9 @@ public class UserBO {
 	public User getUserId(String name, String email) {
 		return userDAO.selectUserId(name, email);
 	}
+	
+	// 사용자 정보 조회
+	public User getUserById(int id) {
+		return userDAO.selectUserById(id);
+	}
 }

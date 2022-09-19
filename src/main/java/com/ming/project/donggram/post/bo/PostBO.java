@@ -1,10 +1,7 @@
 package com.ming.project.donggram.post.bo;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,12 +9,19 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.ming.project.donggram.common.FileManagerService;
 import com.ming.project.donggram.post.dao.PostDAO;
+import com.ming.project.donggram.post.model.Post;
+import com.ming.project.donggram.post.model.PostDetail;
+import com.ming.project.donggram.user.bo.UserBO;
+import com.ming.project.donggram.user.model.User;
 
 @Service
 public class PostBO {
 	
 	@Autowired
 	private PostDAO postDAO;
+	
+	@Autowired
+	private UserBO userBO;
 
 	// 게시물 작성
 	public int addPost(int userId, String content, MultipartFile file) {
@@ -39,25 +43,33 @@ public class PostBO {
 	}
 	
 	// 타임라인 게시물 불러오기
-	public List<Map<String, Object>> getPostUser(int userId) {
+	public List<PostDetail> getPostList() {
 		
-		Map<String, Object> map = new HashMap<>();
-		List<Map<String, Object>> list = new ArrayList<>();
-
-		List<Object> obj = postDAO.selectPostUser(userId);
-		Iterator<Object> iter = obj.iterator();
+		List<Post> postList = postDAO.selectPostList();
 		
-		while(iter.hasNext()) {
-			map.put("id", obj.get(0));
-			map.put("imagePath", obj.get(1));
-			map.put("contents", obj.get(2));
-			map.put("userId", obj.get(3));
-			map.put("name", obj.get(4));
-			list.add(map);
+		List<PostDetail> postDetailList = new ArrayList<>();
+		
+		for (Post post : postList) {
+			int userId = post.getUserId();
+			
+			// userId 로 User 테이블 조회해서 사용자 정보 가져오기
+			// -> userBO 를 통해
+			User user = userBO.getUserById(userId);
+			
+			// 조회한 post 와 user 가 하나의 묶음이 되어서 저장 리턴 되어야 함
+			
+			PostDetail postDetail = new PostDetail();
+			postDetail.setPost(post);
+			postDetail.setUser(user);
+			
+			postDetailList.add(postDetail);
 		}
 		
-		
-		return list;
+		return postDetailList;
 	}
 	
+	// 게시물 보기
+	public Post getPostById(int id) {
+		return postDAO.selectPostById(id);
+	}
 }
