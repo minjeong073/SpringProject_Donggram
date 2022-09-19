@@ -57,8 +57,16 @@
 						<div>
 							<img id="preview" src="" class="w-100 h-100">
 						</div>
-					</div>	
-					<input type="file" id="fileInput">
+					</div>
+					
+					<a href="#" id="imageIcon" class="ml-3">
+						<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="black" class="bi bi-image" viewBox="0 0 16 16">
+						  <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+						  <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/>
+						</svg>
+					</a>
+					<input type="file" id="fileInput" class="d-none">
+					
 				</div>
 				
 			</div>
@@ -94,12 +102,12 @@
 			
 			$("#shareBtn").on("click", function() {
 				
-				let file = $("#fileInput").val();
 				let content = $("#contentInput").val();
 				
 				// validation
 				
-				if (file == "") {
+				// file 에 대한 validation
+				if ($("#fileInput")[0].files.length == 0) {
 					alert("사진을 추가하세요");
 					return ;
 				}
@@ -108,7 +116,6 @@
 					alert("게시물 내용을 입력하세요");
 					return ;
 				}
-				
 				
 				var formData = new FormData();
 				formData.append("content", content);
@@ -145,7 +152,11 @@
 					}
 					reader.readAsDataURL(this.files[0]);
 				}
-			})
+			});
+			
+			$("#imageIcon").on("click", function() {
+				$("#fileInput").click();
+			});
 		});
 	
 	</script>
