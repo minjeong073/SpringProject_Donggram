@@ -31,23 +31,23 @@
 			<div>
 				<c:forEach var="postDetail" items="${postDetailList }">
 				
-				<div class="feed border m-3">
+				<div id="feed" class="feed border m-3" value="${postDetail.post.id }">
 				
-					<div class="user-info-box border  d-flex align-items-center">
+					<div class="user-info-box border d-flex align-items-center">
 						<div id="user-img" class="col-2  d-flex align-items-center">
-							<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+							<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
 							  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
 							  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
 							</svg>
 						</div>
 						
-						<div id="user-name" class="col-3 ">
+						<div id="user-name" class="col-3">
 							<div><h4>${postDetail.user.loginId }</h4></div>
 							<div>#location#</div>
 						</div>
 						
 						<div id="follow-btn" class="col-2">
-							<button class="btn btn-outline-info">follow</button>
+							<button class="btn btn-outline-info btn-sm">follow</button>
 						</div>
 						
 						<div class="col-3 mr-3"></div>
@@ -95,18 +95,18 @@
 							</div>
 							
 							<div class="d-flex align-items-center"> 
-								<span class="mr-2">
+								<span class="mr-2 mb-2">
 									<b class="mr-2">${postDetail.user.loginId }</b>
-									${postDetail.post.contents }
+									<span id="contentsLengthLimit">${postDetail.post.contents }</span>
 									<!-- 글자 옆에 더보기 버튼이 있도록 ? -->
-									<button class="small btn btn-link text-secondary">더보기</button> 
+									<button id="moreTextBtn" class="small btn btn-link text-secondary d-none">더보기</button> 
 								</span>
 							</div>
 							<div class="ml-4">
-								<div class="text-secondary">댓글 3개 모두 보기</div>
+								<div class="text-secondary"><a href="/post/detail/comment/view?postId=${postDetail.post.postId }" class="text-dark" >댓글 <!-- TODO -->개 모두 보기</a></div>
 								<div class="text-secondary d-flex mt-2">
-									<input type="text" class="form-control" placeholder="댓글 달기 ...">
-									<button class="btn mx-4">입력</button>
+									<input type="text" class="form-control" placeholder="댓글 달기 ..." id="commentInput">
+									<button class="btn mx-4" id="commentInputBtn">입력</button>
 								</div>
 							</div>
 						</div>
@@ -134,9 +134,60 @@
 				$("#banner").addClass("d-none");
 			});
 			
+			// 더보기 버튼
+			// 36, 40(32)
+			/*
+			var contents = $("#contentsLengthLimit").val();
+			var contents_short = contents.substring(0,32) + "...";
+
+			if (contents.length > 32) {
+				$("#contentsLengthLimit").html(contents_short);
+				$("#moreTextBtn").removeClass("d-none");
+				
+			} else {
+				$("#moreTextBtn").addClass("d-none");
+			}
 			
+			$("#moreTextBtn").on("click", function() {
+				if ($(this).hasClass("d-none")) {
+					$("#contentsLengthLimit").html(contents_sh)
+					$(this).removeClass("d-none");
+				}
+			})
+			*/
 			
+			$("#commentInputBtn").on("click", function() {
+				
+				let postId = $("#feed").val();
+				let comment = $("#commentInput").val();
+				
+				// validation
+				
+				if (comment =="") {
+					alert("댓글을 입력해주세요");
+					return;
+				}
+				
+				$.ajax({
+					type:"post"
+					, url:"/user/comment/create"
+					, data{"postId":postId, "comment":comment}
+					, success:function(data) {
+						if (data.result == "success") {
+							location.reload();
+						} else {
+							alert("댓글 달기 실패");
+						}
+					}
+					, error:function() {
+						alert("댓글 달기 에러");
+					}
+				});
+			});
+			
+	
 		});
+		
 	</script>
 	
 </body>

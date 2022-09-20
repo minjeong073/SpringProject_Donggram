@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ming.project.donggram.post.bo.PostBO;
+import com.ming.project.donggram.post.comment.bo.CommentBO;
+import com.ming.project.donggram.post.comment.model.Comment;
 import com.ming.project.donggram.post.model.Post;
 import com.ming.project.donggram.post.model.PostDetail;
 
@@ -19,13 +21,23 @@ public class PostController {
 	
 	@Autowired
 	private PostBO postBO;
+	
+	@Autowired
+	private CommentBO commentBO;
 
 	@GetMapping("/timeline/view")
-	public String timelineView(Model model) {
+	public String timelineView(
+			// TODO @RequestParam("postId") int postId
+			Model model) {
 		
 		List<PostDetail> postDetailList = postBO.getPostList();
 		
 		model.addAttribute("postDetailList", postDetailList);
+		
+		// TODO : postId 어떻게 가져올지
+		// int commentCount = commentBO.countComment(postId);
+		
+		// model.addAttribute("commentCount", commentCount);
 		
 		return "post/timeline";
 	}
@@ -46,4 +58,17 @@ public class PostController {
 		
 		return "post/detail";
 	}
+	
+	@GetMapping("/detail/comment/view")
+	public String commentView(
+			@RequestParam("postId") int postId
+			, Model model) {
+		
+		List<Comment> commentList = commentBO.getComment(postId);
+		
+		model.addAttribute("commentList", commentList);
+		
+		return "post/comment";
+	}
+	
 }

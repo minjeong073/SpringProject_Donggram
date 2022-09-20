@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ming.project.donggram.common.FileManagerService;
+import com.ming.project.donggram.post.comment.model.Comment;
 import com.ming.project.donggram.post.dao.PostDAO;
 import com.ming.project.donggram.post.model.Post;
 import com.ming.project.donggram.post.model.PostDetail;
@@ -72,4 +73,7 @@ public class PostBO {
 	public Post getPostById(int id) {
 		return postDAO.selectPostById(id);
 	}
+	
+	
+	
 }

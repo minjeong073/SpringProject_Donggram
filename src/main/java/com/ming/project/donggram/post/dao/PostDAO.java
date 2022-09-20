@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import com.ming.project.donggram.post.comment.model.Comment;
 import com.ming.project.donggram.post.model.Post;
 
 @Repository
@@ -22,4 +23,5 @@ public interface PostDAO {
 			@Param("id") int id);
 	
 	public List<Post> selectPostList();
+	
 }
