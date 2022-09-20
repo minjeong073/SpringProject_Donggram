@@ -82,7 +82,7 @@
 			var isDuplicate = true;
 			
 			<%-- 아이디 변경 시 중복 확인 초기화 --%>
-			$("input").on("propertychange change keyup paste input", function() {
+			$("input").on("input", function() {
 				
 				isCheck = false;
 				isDuplicate = true;
