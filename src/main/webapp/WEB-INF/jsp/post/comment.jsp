@@ -26,9 +26,26 @@
 	
 	<div class="container d-flex flex-column align-items-center">
 		
-		<section class="contents bg-info d-flex flex-column align-items-center">
-		
-		
+		<section class="contents d-flex flex-column align-items-center">
+		<div class="m-3 commentBox">
+			<div class="h-50 display-4">
+				<b>${postDetail.user.loginId }</b>
+				${postDetail.post.contents }
+			</div>
+			
+			<hr>
+			
+			<div class="h-50">
+				<table class="table">
+				<c:forEach var="commentDetail" items="${postDetail.commentDetailList }">
+					<tr>
+						<th>${commentDetail.user.loginId }</th>
+						<td>${commentDetail.comment.comment }</td>
+					</tr>
+				</c:forEach>
+				</table>
+			</div>
+		</div>
 		</section>
 	</div>
 	

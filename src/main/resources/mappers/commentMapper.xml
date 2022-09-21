@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- mybatis dtd -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ming.project.donggram.post.comment.dao.CommentDAO">
+
+	<insert id="insertComment" parameterType="map">
+	
+		INSERT INTO
+			`comment`
+		(
+			`postId`
+			, `userId`
+			, `comment`
+			, `createdAt`
+			, `updatedAt`
+		)
+		VALUES
+		(
+			#{postId}
+			, #{userId}
+			, #{comment}
+			, now()
+			, now()
+		)
+		
+	</insert>
+	
+	<select id="countComment" parameterType="int" resultType="int">
+	
+		SELECT
+			count(*)
+		FROM
+			`comment`
+			
+	</select>
+
+	<select id="selectComment" parameterType="int" 
+	resultType="com.ming.project.donggram.post.comment.model.Comment">
+	
+		SELECT
+			`id`
+			, `postId`
+			, `userId`
+			, `comment`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`comment`
+		WHERE
+			`postId` = #{postId}
+		ORDER BY
+			`id` DESC
+	
+	</select>
+
+</mapper>

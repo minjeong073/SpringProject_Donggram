@@ -79,18 +79,21 @@
 					</div>
 					
 					<div class="feed-info-box border">
-						<div class="mx-4 my-3">
+						<div class="mx-4 my-2">
 							<div id="feed-icon" class="d-flex">
-								<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-heart mt-1 mr-2" viewBox="0 0 16 16">
-								  <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
-								</svg>
-		
-								<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-chat" viewBox="0 0 16 15">
-								  <path d="M2.678 11.894a1 1 0 0 1 .287.801 10.97 10.97 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8.06 8.06 0 0 0 8 14c3.996 0 7-2.807 7-6 0-3.192-3.004-6-7-6S1 4.808 1 8c0 1.468.617 2.83 1.678 3.894zm-.493 3.905a21.682 21.682 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a9.68 9.68 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105z"/>
-								</svg>
+								<a href="#" class="like-btn" data-post-id="${postDetail.post.id }">
+									<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-heart mt-1 mr-2" viewBox="0 0 16 16">
+									  <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+									</svg>				
+								</a>
+								<a href="#" id="commentBtn">				
+									<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-chat" viewBox="0 0 16 15">
+									  <path d="M2.678 11.894a1 1 0 0 1 .287.801 10.97 10.97 0 0 1-.398 2c1.395-.323 2.247-.697 2.634-.893a1 1 0 0 1 .71-.074A8.06 8.06 0 0 0 8 14c3.996 0 7-2.807 7-6 0-3.192-3.004-6-7-6S1 4.808 1 8c0 1.468.617 2.83 1.678 3.894zm-.493 3.905a21.682 21.682 0 0 1-.713.129c-.2.032-.352-.176-.273-.362a9.68 9.68 0 0 0 .244-.637l.003-.01c.248-.72.45-1.548.524-2.319C.743 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.52.263-1.639.742-3.468 1.105z"/>
+									</svg>
+								</a>
 							</div>
 
-							<div class="mt-3">
+							<div class="mt-1">
 								<b>user2</b> 님 외 50명이 좋아합니다
 							</div>
 							
@@ -102,11 +105,20 @@
 									<button id="moreTextBtn" class="small btn btn-link text-secondary d-none">더보기</button> 
 								</span>
 							</div>
+							
+							<!-- 댓글 입력 -->
 							<div class="ml-4">
-								<div class="text-secondary"><a href="/post/detail/comment/view?postId=${postDetail.post.postId }" class="text-dark" >댓글 <!-- TODO -->개 모두 보기</a></div>
+								<div>
+									<!-- TODO : 입력한 댓글 하나만 보이기 (loginId + comment) -->
+								</div>
+								<div class="text-secondary">
+									<a href="/post/detail/comment/view?postId=${postDetail.post.id }" class="text-dark" >
+										댓글 <!-- TODO -->개 모두 보기
+									</a>
+								</div>
 								<div class="text-secondary d-flex mt-2">
-									<input type="text" class="form-control" placeholder="댓글 달기 ..." id="commentInput">
-									<button class="btn mx-4" id="commentInputBtn">입력</button>
+									<input type="text" class="form-control" placeholder="댓글 달기 ..." id="commentInput${postDetail.post.id }">
+									<button class="btn mx-4 comment-btn" data-post-id="${postDetail.post.id }">입력</button>
 								</div>
 							</div>
 						</div>
@@ -134,6 +146,65 @@
 				$("#banner").addClass("d-none");
 			});
 			
+			
+			// 좋아요 버튼
+			$(".like-btn").on("click", function(e) {
+				e.preventDefault(); // a tag 의 기본 기능 제거
+				
+				let postId = $(this).data("post-id"); // click event 가 발생한 부분의 data 속성 값
+				
+				$.ajax({
+					type:"get"
+					, url:"/post/like"
+					, data:{"postId":postId}
+					, success:function(data) {
+						if (data.result == "success") {
+							location.reload();
+						} else {
+							alert("좋아요 실패");
+						}
+					}	
+					, error:function() {
+						alert("좋아요 에러");
+					}
+				});
+				
+			});
+			
+			
+			// 댓글 달기 버튼
+			$(".comment-btn").on("click", function() {
+				
+				let postId = $(this).data("post-id");
+				let comment = $("#commentInput" + postId).val();	// $("#commentInput3") 과 동일! (문자열)
+				
+				// validation
+				
+				if (comment == "") {
+					alert("댓글을 입력해주세요");
+					return;
+				}
+				
+				$.ajax({
+					type:"post"
+					, url:"/post/comment/create"
+					, data:{"postId":postId, "comment":comment}
+					, success:function(data) {
+						if (data.result == "success") {
+							location.reload();
+						} else {
+							alert("댓글 달기 실패");
+						}
+					}
+					, error:function() {
+						alert("댓글 달기 에러");
+					}
+					
+				});
+				
+			});
+			
+			
 			// 더보기 버튼
 			// 36, 40(32)
 			/*
@@ -153,38 +224,8 @@
 					$("#contentsLengthLimit").html(contents_sh)
 					$(this).removeClass("d-none");
 				}
-			})
-			*/
-			
-			$("#commentInputBtn").on("click", function() {
-				
-				let postId = $("#feed").val();
-				let comment = $("#commentInput").val();
-				
-				// validation
-				
-				if (comment =="") {
-					alert("댓글을 입력해주세요");
-					return;
-				}
-				
-				$.ajax({
-					type:"post"
-					, url:"/user/comment/create"
-					, data{"postId":postId, "comment":comment}
-					, success:function(data) {
-						if (data.result == "success") {
-							location.reload();
-						} else {
-							alert("댓글 달기 실패");
-						}
-					}
-					, error:function() {
-						alert("댓글 달기 에러");
-					}
-				});
 			});
-			
+			*/
 	
 		});
 		

@@ -79,51 +79,5 @@
 		
 	</select>
 	
-	<insert id="insertComment" parameterType="map">
 	
-		INSERT INTO
-			`comment`
-		(
-			`postId`
-			, `userId`
-			, `comment`
-			, `createdAt`
-			, `updatedAt`
-		)
-		VALUES
-		(
-			#{postId}
-			, #{userId}
-			, #{comment}
-			, now()
-			, now()
-		)
-		
-	</insert>
-	
-	<select id="countComment" parameterType="int" resultType="int">
-	
-		SELECT
-			count(*)
-		FROM
-			`comment`
-			
-	</select>
-
-	<select id="selectComment" parameterType="int" 
-	resultType="com.ming.project.donggram.post.comment.model.Comment">
-	
-		SELECT
-			`id`
-			, `postId`
-			, `userId`
-			, `comment`
-			, `createdAt`
-			, `updatedAt`
-		FROM
-			`comment`
-		WHERE
-			`postId` = #{postId}
-	
-	</select>
 </mapper>

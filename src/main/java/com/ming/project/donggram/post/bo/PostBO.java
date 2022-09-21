@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ming.project.donggram.common.FileManagerService;
+import com.ming.project.donggram.post.comment.bo.CommentBO;
 import com.ming.project.donggram.post.comment.model.Comment;
+import com.ming.project.donggram.post.comment.model.CommentDetail;
 import com.ming.project.donggram.post.dao.PostDAO;
 import com.ming.project.donggram.post.model.Post;
 import com.ming.project.donggram.post.model.PostDetail;
@@ -23,6 +25,9 @@ public class PostBO {
 	
 	@Autowired
 	private UserBO userBO;
+	
+	@Autowired
+	private CommentBO commentBO;
 
 	// 게시물 작성
 	public int addPost(int userId, String content, MultipartFile file) {
@@ -52,8 +57,9 @@ public class PostBO {
 		
 		for (Post post : postList) {
 			int userId = post.getUserId();
+			int postId = post.getId();
 			
-			// userId 로 User 테이블 조회해서 사용자 정보 가져오기
+			// userId 로 User 테이블 조회해서 사용자 정보 가져오기 (게시물 작성자 정보)
 			// -> userBO 를 통해
 			User user = userBO.getUserById(userId);
 			
@@ -62,6 +68,22 @@ public class PostBO {
 			PostDetail postDetail = new PostDetail();
 			postDetail.setPost(post);
 			postDetail.setUser(user);
+			
+			// + postId 로 Comment 테이블 조회해서 댓글, 댓글 작성자 정보 가져오기
+			List<CommentDetail> commentDetailList = new ArrayList<>();
+			List<Comment> commentList = commentBO.getCommentList(postId);
+			
+			// 댓글에 해당하는 작성자 정보 하나씩 가져오기
+			for(Comment comment : commentList) {
+				int commentUserId = comment.getUserId();
+				User commentUser = userBO.getUserById(commentUserId);
+				CommentDetail commentDetail = new CommentDetail();
+				
+				commentDetail.setUser(commentUser);
+				commentDetail.setComment(comment);
+				commentDetailList.add(commentDetail);
+			}
+			postDetail.setCommentDetailList(commentDetailList);
 			
 			postDetailList.add(postDetail);
 		}
@@ -73,7 +95,6 @@ public class PostBO {
 	public Post getPostById(int id) {
 		return postDAO.selectPostById(id);
 	}
-	
 	
 	
 }

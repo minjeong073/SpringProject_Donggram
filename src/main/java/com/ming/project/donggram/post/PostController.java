@@ -21,14 +21,9 @@ public class PostController {
 	
 	@Autowired
 	private PostBO postBO;
-	
-	@Autowired
-	private CommentBO commentBO;
 
 	@GetMapping("/timeline/view")
-	public String timelineView(
-			// TODO @RequestParam("postId") int postId
-			Model model) {
+	public String timelineView(Model model) {
 		
 		List<PostDetail> postDetailList = postBO.getPostList();
 		
@@ -57,18 +52,6 @@ public class PostController {
 		model.addAttribute("post", post);
 		
 		return "post/detail";
-	}
-	
-	@GetMapping("/detail/comment/view")
-	public String commentView(
-			@RequestParam("postId") int postId
-			, Model model) {
-		
-		List<Comment> commentList = commentBO.getComment(postId);
-		
-		model.addAttribute("commentList", commentList);
-		
-		return "post/comment";
 	}
 	
 }

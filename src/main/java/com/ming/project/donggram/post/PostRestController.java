@@ -22,9 +22,6 @@ public class PostRestController {
 	
 	@Autowired
 	private PostBO postBO;
-	
-	@Autowired
-	private CommentBO commentBO;
 
 	// 게시물 작성 기능
 	@PostMapping("/create")
@@ -40,30 +37,6 @@ public class PostRestController {
 		int userId = (Integer) session.getAttribute("userId");
 		
 		int count = postBO.addPost(userId, content, file);
-		
-		if (count == 1) {
-			result.put("result", "success");
-		} else {
-			result.put("result", "fail");
-		}
-		
-		return result;
-	}
-	
-	// 댓글 달기
-	@PostMapping("/comment/create")
-	public Map<String, String> comment(
-			@RequestParam("postId") int postId
-			, @RequestParam("comment") String comment
-			, HttpServletRequest req) {
-		
-		Map<String, String> result = new HashMap<>();
-		
-		HttpSession session = req.getSession();
-		
-		int userId = (Integer) session.getAttribute("userId");
-		
-		int count = commentBO.addComment(postId, userId, comment);
 		
 		if (count == 1) {
 			result.put("result", "success");

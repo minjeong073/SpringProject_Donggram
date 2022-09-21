@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ming.project.donggram.post.comment.dao.CommentDAO;
 import com.ming.project.donggram.post.comment.model.Comment;
+import com.ming.project.donggram.post.comment.model.CommentDetail;
 import com.ming.project.donggram.post.dao.PostDAO;
 import com.ming.project.donggram.user.bo.UserBO;
 
@@ -27,7 +28,9 @@ public class CommentBO {
 	}
 	
 	// 댓글 보기
-	public List<Comment> getComment(int postId) {
+	public List<Comment> getCommentList(int postId) {
 		return commentDAO.selectComment(postId);
 	}
+	
+	
 }

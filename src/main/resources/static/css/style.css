@@ -129,7 +129,9 @@ section
 	text-decoration: none;
 }
 
-
+.contents > .commentBox {
+	width: 700px;
+}
 
 
 footer {
