@@ -2,6 +2,9 @@ package com.ming.project.donggram.post.comment;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,9 +29,13 @@ public class CommentController {
 	@GetMapping("/post/detail/comment/view")
 	public String commentView(
 			@RequestParam("postId") int postId
-			, Model model) {
+			, Model model
+			, HttpServletRequest req) {
 		
-		List<PostDetail> postDetailList = postBO.getPostList();
+		HttpSession session = req.getSession();
+		int userId = (Integer) session.getAttribute("userId");
+
+		List<PostDetail> postDetailList = postBO.getPostList(userId);
 		for(PostDetail postDetail : postDetailList) {
 			if (postDetail.getPost().getId() == postId) {
 				model.addAttribute("postDetail", postDetail);

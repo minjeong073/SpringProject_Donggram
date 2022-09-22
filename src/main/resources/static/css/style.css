@@ -75,8 +75,8 @@ section
 }
 
 .feed-img-box > .feed-img {
-	width: 700px;
-	height: 600px;
+	width: 698px;
+	height: 598px;
 	object-fit: contain;
 }
 
@@ -137,6 +137,10 @@ section
 
 .contents > .commentBox {
 	width: 700px;
+}
+
+.text-user-loginId, .text-post-contents {
+	font-size: xx-large;
 }
 
 .table-user-loginId {

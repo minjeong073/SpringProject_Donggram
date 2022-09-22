@@ -22,14 +22,9 @@ public class CommentBO {
 		return commentDAO.insertComment(postId, userId, comment);
 	}
 	
-	// 댓글 개수
-	public int countComment(int postId) {
-		return commentDAO.countComment(postId);
-	}
-	
 	// 댓글 보기
 	public List<Comment> getCommentList(int postId) {
-		return commentDAO.selectComment(postId);
+		return commentDAO.selectCommentList(postId);
 	}
 	
 	

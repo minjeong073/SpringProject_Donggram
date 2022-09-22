@@ -3,6 +3,8 @@
     
 <!-- jstl core library -->    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!-- jstl function library -->
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html>
@@ -69,6 +71,7 @@
 									</svg>
 								</div>
 								<div class="text-center">
+								<!-- TODO : 게시물 수정, 삭제 링크 -->
 									<p> 수정 </p>
 									<p> 삭제 </p>
 								</div>
@@ -88,9 +91,18 @@
 						<!-- 좋아요, 댓글 버튼 -->
 							<div id="feed-icon" class="d-flex">
 								<a href="#" class="like-btn text-dark" data-post-id="${postDetail.post.id }">
-									<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-heart mt-1 mr-2" viewBox="0 0 16 16">
-									  <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
-									</svg>				
+								<c:choose>
+									<c:when test="${postDetail.like }">
+										<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="red" class="bi bi-heart-fill mt-1 mr-2" viewBox="0 0 16 16">
+										  <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+										</svg>
+									</c:when>
+									<c:otherwise>
+										<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-heart mt-1 mr-2" viewBox="0 0 16 16">
+										  <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+										</svg>				
+									</c:otherwise>
+								</c:choose>
 								</a>
 								<a href="/post/detail/comment/view" class="commentBtn text-dark">			
 									<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-chat" viewBox="0 0 16 15">
@@ -98,9 +110,19 @@
 									</svg>
 								</a>
 							</div>
-
+							<!-- 좋아요 -->
 							<div class="mt-1">
-								<b>user2</b> 님 외 50명이 좋아합니다
+								<c:choose>
+									<c:when test="${postDetail.likeCount == 0 }">
+										
+									</c:when>
+									<c:when test="${postDetail.likeCount == 1 }">
+										<b></b> 님이 좋아합니다
+									</c:when>
+									<c:otherwise>
+										<b></b> 님 외 ${postDetail.likeCount -1 } 명이 좋아합니다
+									</c:otherwise>
+								</c:choose>
 							</div>
 							
 							<!-- 게시물 글 -->
@@ -108,7 +130,7 @@
 								<span class="mr-2 mb-2">
 									<b class="mr-2">${postDetail.user.loginId }</b>
 									<span id="contentsLengthLimit">${postDetail.post.contents }</span>
-									<!-- 글자 옆에 더보기 버튼이 있도록 ? -->
+									<!-- TODO : 글이 길어지면 글자 옆에 더보기 버튼 -->
 									<button id="moreTextBtn" class="small btn btn-link text-secondary d-none">더보기</button> 
 								</span>
 							</div>
@@ -116,11 +138,31 @@
 							<!-- 댓글 입력 -->
 							<div class="ml-4">
 								<div>
-									<!-- TODO : 입력한 댓글 하나만 보이기 (loginId + comment) -->
+									<!-- FIN : 입력한 댓글 하나만 보이기 (loginId + comment) -->
+									<c:choose>
+										<c:when test="${fn:length(postDetail.commentDetailList) != 0 }">	<!-- 댓글이 있으면 -->
+											<div>
+											<!-- 제일 최근 댓글 -->
+												<span class="mr-2"><b>${postDetail.commentDetailList[0].user.loginId }</b></span>
+												<span>${postDetail.commentDetailList[0].comment.comment }</span>
+											</div>
+										</c:when>
+										<c:otherwise>
+											<div></div>
+										</c:otherwise>
+									</c:choose>
 								</div>
+								<!-- 댓글 -->
 								<div class="text-secondary">
 									<a href="/post/detail/comment/view?postId=${postDetail.post.id }" class="text-dark" >
-										댓글 <!-- TODO -->개 모두 보기
+										<c:choose>
+											<c:when test="${fn:length(postDetail.commentDetailList) != 0 }">
+												<span class="text-secondary">댓글 ${fn:length(postDetail.commentDetailList) }개 모두 보기</span>
+											</c:when>
+											<c:otherwise>
+												<br>
+											</c:otherwise>
+										</c:choose>
 									</a>
 								</div>
 								<div class="text-secondary d-flex mt-2">
@@ -166,8 +208,6 @@
 					, data:{"postId":postId}
 					, success:function(data) {
 						if (data.result == "success") {
-							// TODO : 로그인 한 사용자가 좋아요 누른 사용자일 경우 채워진 하트 
-							$(this).
 							location.reload();
 						} else {
 							alert("좋아요 실패");
