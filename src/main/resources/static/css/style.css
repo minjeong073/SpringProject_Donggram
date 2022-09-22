@@ -74,6 +74,12 @@ section
 	height: 600px;
 }
 
+.feed-img-box > .feed-img {
+	width: 700px;
+	height: 600px;
+	object-fit: contain;
+}
+
 .feed > .feed-info-box {
 	width: 700px;
 	height: 220px;
@@ -133,6 +139,9 @@ section
 	width: 700px;
 }
 
+.table-user-loginId {
+	width: 120px;
+}
 
 footer {
 	height: 70px;

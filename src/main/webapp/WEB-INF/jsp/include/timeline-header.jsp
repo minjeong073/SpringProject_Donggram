@@ -20,13 +20,20 @@
 			
 			
 			<div class="d-flex">
-				<c:if test="${not empty userId }">
+			<c:choose>
+				<c:when test="${not empty userId }">
 					<div class="userInfo d-flex mr-3 align-items-center">
 						<h4 class="mr-2">${userLoginId }</h4>
 						<a href="/user/signout">로그아웃</a>
 					</div>			
-				</c:if>
-			
+				</c:when>
+				<c:otherwise>
+					<div class="userInfo d-flex mr-3 align-items-center">
+						<a href="/user/signin/view">로그인</a>
+					</div>
+				</c:otherwise>
+			</c:choose>
+				
 			
 				<nav>
 					<ul class="nav nav-fill d-flex align-items-center">

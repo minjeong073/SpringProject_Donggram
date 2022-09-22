@@ -29,18 +29,18 @@
 		<section class="contents d-flex flex-column align-items-center">
 		<div class="m-3 commentBox">
 			<div class="h-50 display-4">
-				<b>${postDetail.user.loginId }</b>
+				<b class="mr-3">${postDetail.user.loginId }</b>
 				${postDetail.post.contents }
 			</div>
 			
-			<hr>
+			<br>
 			
 			<div class="h-50">
-				<table class="table">
+				<table class="table" border="0">
 				<c:forEach var="commentDetail" items="${postDetail.commentDetailList }">
 					<tr>
-						<th>${commentDetail.user.loginId }</th>
-						<td>${commentDetail.comment.comment }</td>
+						<th class="table-user-loginId"><h4>${commentDetail.user.loginId }</h4></th>
+						<td class=""><h5>${commentDetail.comment.comment }</h5></td>
 					</tr>
 				</c:forEach>
 				</table>
