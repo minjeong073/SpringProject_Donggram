@@ -26,6 +26,10 @@ public class LikeBO {
 		return likeDAO.selectCountLikeByUserId(userId, postId) != 0;
 	}
 	
-	
+	// 좋아요 누른 사용자 정보 가져오기
+	public User getLikeUser(int userId) {
+		
+	}
+
 	
 }

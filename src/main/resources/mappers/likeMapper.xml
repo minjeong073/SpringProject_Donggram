@@ -47,4 +47,10 @@
 			AND `postId` = #{postId}
 					
 	</select>
+	
+	<select id="selectLikeUser" parameterType="int"
+	resultType="com.ming.project.donggram.user.model.User">
+	
+	
+	</select>
 </mapper>
