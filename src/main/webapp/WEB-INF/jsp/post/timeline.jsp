@@ -57,8 +57,8 @@
 						<div class="col-3 mr-3"></div>
 						
 						<!-- 수정 삭제 메뉴 -->
-						<div id="navbar-header" class="col-1">
-							<button type="button" class="btn btn-sm btn-link" id="openPop">
+						<div id="navbar-header" class="col-1" >
+							<button type="button" class="btn btn-sm btn-link" id="openPop" data-toggle="modal" data-target="moreModal">
 								<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="gray" class="bi bi-three-dots" viewBox="0 0 16 16">
 								  <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
 								</svg>
@@ -72,8 +72,8 @@
 								</div>
 								<div class="text-center">
 								<!-- TODO : 게시물 수정, 삭제 링크 -->
-									<p> 수정 </p>
-									<p> 삭제 </p>
+									<a href="#">수정</a>
+									<a href="#">삭제</a>
 								</div>
 							</div>
 							
@@ -92,7 +92,7 @@
 							<div id="feed-icon" class="d-flex">
 								<a href="#" class="like-btn text-dark" data-post-id="${postDetail.post.id }">
 								<c:choose>
-									<c:when test="${postDetail.like }">
+									<c:when test="${postDetail.likeDetailList[0].like }">
 										<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="red" class="bi bi-heart-fill mt-1 mr-2" viewBox="0 0 16 16">
 										  <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
 										</svg>
@@ -113,14 +113,14 @@
 							<!-- 좋아요 -->
 							<div class="mt-1">
 								<c:choose>
-									<c:when test="${postDetail.likeCount == 0 }">
+									<c:when test="${postDetail.likeDetailList.likeCount == 0 }">
 										
 									</c:when>
-									<c:when test="${postDetail.likeCount == 1 }">
+									<c:when test="${postDetail.likeDetailList.likeCount == 1 }">
 										<b></b> 님이 좋아합니다
 									</c:when>
 									<c:otherwise>
-										<b></b> 님 외 ${postDetail.likeCount -1 } 명이 좋아합니다
+										<b></b> 님 외 ${postDetail.likeDetailList.likeCount -1 } 명이 좋아합니다
 									</c:otherwise>
 								</c:choose>
 							</div>
@@ -181,6 +181,24 @@
 		</section>
 		
 		<c:import url="/WEB-INF/jsp/include/footer.jsp" />
+		
+		<!-- Button trigger modal -->
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="moreModal">
+		  Launch demo modal
+		</button>
+		
+		<!-- Modal -->
+		<div class="modal fade" id="moreModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      
+		      <div class="modal-body">
+		        삭제하기
+		      </div>
+		      
+		    </div>
+		  </div>
+		</div>
 		
 	</div>
 	

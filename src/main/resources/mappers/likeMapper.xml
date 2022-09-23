@@ -35,6 +35,7 @@
 			`postId` = #{postId}
 		
 	</select>
+	
 
 	<select id="selectCountLikeByUserId" parameterType="map" resultType="int">
 		
@@ -48,9 +49,20 @@
 					
 	</select>
 	
-	<select id="selectLikeUser" parameterType="int"
-	resultType="com.ming.project.donggram.user.model.User">
 	
+	<select id="selectLikeList" parameterType="int"
+	resultType="com.ming.project.donggram.post.like.model.Like">
 	
+		SELECT
+			`id`
+			, `postId`
+			, `userId`
+			, `createdAt`
+		FROM
+			`like`
+		WHERE
+			`postId` = #{postId}
+		
 	</select>
+	
 </mapper>

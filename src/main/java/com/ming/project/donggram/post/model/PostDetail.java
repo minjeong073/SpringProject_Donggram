@@ -3,6 +3,7 @@ package com.ming.project.donggram.post.model;
 import java.util.List;
 
 import com.ming.project.donggram.post.comment.model.CommentDetail;
+import com.ming.project.donggram.post.like.model.LikeDetail;
 import com.ming.project.donggram.user.model.User;
 
 public class PostDetail {
@@ -12,6 +13,7 @@ public class PostDetail {
 	private List<CommentDetail> commentDetailList;
 	private int likeCount;
 	private boolean isLike;
+	private List<LikeDetail> likeDetailList;
 	
 	public Post getPost() {
 		return post;
@@ -31,17 +33,11 @@ public class PostDetail {
 	public void setCommentDetailList(List<CommentDetail> commentDetailList) {
 		this.commentDetailList = commentDetailList;
 	}
-	public int getLikeCount() {
-		return likeCount;
+	public List<LikeDetail> getLikeDetailList() {
+		return likeDetailList;
 	}
-	public void setLikeCount(int likeCount) {
-		this.likeCount = likeCount;
-	}
-	public boolean isLike() {
-		return isLike;
-	}
-	public void setLike(boolean isLike) {
-		this.isLike = isLike;
+	public void setLikeDetailList(List<LikeDetail> likeDetailList) {
+		this.likeDetailList = likeDetailList;
 	}
 	
 }

@@ -6,6 +6,7 @@ public class LikeDetail {
 
 	private int likeCount;
 	private boolean isLike;
+	private Like like;
 	private User user;
 
 	public int getLikeCount() {

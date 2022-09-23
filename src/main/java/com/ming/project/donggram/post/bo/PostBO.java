@@ -9,10 +9,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.ming.project.donggram.common.FileManagerService;
 import com.ming.project.donggram.post.comment.bo.CommentBO;
-import com.ming.project.donggram.post.comment.model.Comment;
 import com.ming.project.donggram.post.comment.model.CommentDetail;
 import com.ming.project.donggram.post.dao.PostDAO;
 import com.ming.project.donggram.post.like.bo.LikeBO;
+import com.ming.project.donggram.post.like.model.LikeDetail;
 import com.ming.project.donggram.post.model.Post;
 import com.ming.project.donggram.post.model.PostDetail;
 import com.ming.project.donggram.user.bo.UserBO;
@@ -69,39 +69,19 @@ public class PostBO {
 			PostDetail postDetail = new PostDetail();
 
 			
-			// userId 로 User 테이블 조회해서 사용자 정보 가져오기 (게시물 작성자 정보)
-			// -> userBO 를 통해
+			// + userId 로 User 테이블 조회해서 사용자 정보 가져오기 (게시물 작성자 정보)
 			User user = userBO.getUserById(userId);
 			
-			// + postId 로 like 개수 가져오기
-			int likeCount = likeBO.getLikeCount(postId);
+			// + postId 로 Comment 테이블 조회해서 댓글, 댓글 작성자 정보 가져오기
+			List<CommentDetail> commentDetailList = commentBO.getCommentList(postId);
 			
-			// + postId, userId 로 like 정보 가져오기
-			// userId 는 param 으로 받아옴
-			boolean isLike = likeBO.isLike(loginUserId, postId);
-			
+			// + loginUserId, postId 로 좋아요, 좋아요 누른 사용자 정보 가져오기
+			List<LikeDetail> likeDetailList = likeBO.getLikeDetailList(loginUserId, postId);
 			
 			postDetail.setPost(post);
 			postDetail.setUser(user);
-			postDetail.setLikeCount(likeCount);
-			postDetail.setLike(isLike);
-			
-			// + postId 로 Comment 테이블 조회해서 댓글, 댓글 작성자 정보 가져오기
-			
-			List<CommentDetail> commentDetailList = new ArrayList<>();
-			List<Comment> commentList = commentBO.getCommentList(postId);
-			
-			// 댓글에 해당하는 작성자 정보 하나씩 가져오기
-			for(Comment comment : commentList) {
-				int commentUserId = comment.getUserId();
-				User commentUser = userBO.getUserById(commentUserId);
-				CommentDetail commentDetail = new CommentDetail();
-
-				commentDetail.setUser(commentUser);
-				commentDetail.setComment(comment);
-				commentDetailList.add(commentDetail);
-			}
 			postDetail.setCommentDetailList(commentDetailList);
+			postDetail.setLikeDetailList(likeDetailList);
 			
 			// 최종 list 에 넣기
 			postDetailList.add(postDetail);
