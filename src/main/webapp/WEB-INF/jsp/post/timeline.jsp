@@ -27,7 +27,6 @@
 	<c:import url="/WEB-INF/jsp/include/timeline-header.jsp"/>	
 	
 	<div class="container d-flex flex-column align-items-center">
-		
 		<section class="contents d-flex flex-column align-items-center">
 		
 			<div>
@@ -38,47 +37,33 @@
 					<div class="user-info-box border d-flex align-items-center">
 
 						<!-- 사용자 정보 -->
-						<div id="user-img" class="col-2  d-flex align-items-center">
+						<div id="user-img" class="col-2 d-flex align-items-center">
 							<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
 							  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
 							  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
 							</svg>
 						</div>
+						
 						<div id="user-name" class="col-3">
 							<div><h4>${postDetail.user.loginId }</h4></div>
-							<div>#location#</div>
 						</div>
 						
-						<!-- 팔로우 버튼 -->
-						<div id="follow-btn" class="col-2">
-							<button class="btn btn-outline-info btn-sm">follow</button>
-						</div>
-						
-						<div class="col-3 mr-3"></div>
+						<div class="col-4 mr-3"></div>
 						
 						<!-- 수정 삭제 메뉴 -->
-						<div id="navbar-header" class="col-1" >
-							<button type="button" class="btn btn-sm btn-link" id="openPop" data-toggle="modal" data-target="moreModal">
-								<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="gray" class="bi bi-three-dots" viewBox="0 0 16 16">
+						<div id="navbar-header dropdown" class="col-2 text-right" >
+							<button class="btn btn-link" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						    	<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="gray" class="bi bi-three-dots" viewBox="0 0 16 16">
 								  <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
 								</svg>
-							</button>
-							
-							<div id="banner" class="d-none border rounded">
-								<div id="closeBtn" style="cursor:pointer;" class="text-right">
-									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-									  <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-									</svg>
-								</div>
-								<div class="text-center">
-								<!-- TODO : 게시물 수정, 삭제 링크 -->
-									<a href="#">수정</a>
-									<a href="#">삭제</a>
-								</div>
-							</div>
-							
+						  	</button>
+							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+								<a class="dropdown-item" href="/post/detail/view">수정</a>
+							    <a class="dropdown-item" href="/post/delete">삭제</a>
+							</div>							
 						</div>
 					</div>
+					
 					
 					<!-- 게시물 이미지 -->
 					<div class="feed-img-box border  d-flex align-items-center"> <!-- width 700 -->
@@ -92,7 +77,7 @@
 							<div id="feed-icon" class="d-flex">
 								<a href="#" class="like-btn text-dark" data-post-id="${postDetail.post.id }">
 								<c:choose>
-									<c:when test="${postDetail.likeDetailList[0].like }">
+									<c:when test="${postDetail.like }">
 										<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="red" class="bi bi-heart-fill mt-1 mr-2" viewBox="0 0 16 16">
 										  <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
 										</svg>
@@ -113,14 +98,14 @@
 							<!-- 좋아요 -->
 							<div class="mt-1">
 								<c:choose>
-									<c:when test="${postDetail.likeDetailList.likeCount == 0 }">
+									<c:when test="${postDetail.likeCount == 0 }">
 										
 									</c:when>
-									<c:when test="${postDetail.likeDetailList.likeCount == 1 }">
-										<b></b> 님이 좋아합니다
+									<c:when test="${postDetail.likeCount == 1 }">
+										<b>${postDetail.likeDetailList[0].user.loginId }</b> 님이 좋아합니다
 									</c:when>
 									<c:otherwise>
-										<b></b> 님 외 ${postDetail.likeDetailList.likeCount -1 } 명이 좋아합니다
+										<b>${postDetail.likeDetailList[0].user.loginId }</b> 님 외 ${postDetail.likeCount -1 } 명이 좋아합니다
 									</c:otherwise>
 								</c:choose>
 							</div>
@@ -182,37 +167,20 @@
 		
 		<c:import url="/WEB-INF/jsp/include/footer.jsp" />
 		
-		<!-- Button trigger modal -->
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="moreModal">
-		  Launch demo modal
-		</button>
-		
-		<!-- Modal -->
-		<div class="modal fade" id="moreModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		  <div class="modal-dialog">
-		    <div class="modal-content">
-		      
-		      <div class="modal-body">
-		        삭제하기
-		      </div>
-		      
-		    </div>
-		  </div>
-		</div>
-		
 	</div>
 	
 	<script>
 		$(document).ready(function() {
 			
-			$("#openPop").on("click", function() {
-				$("#banner").removeClass("d-none");
+			$(".openPop").on("click", function() {
+				let postId = $(this).data("post-id");
+								
+				$(".banner" + postId).removeClass("d-none");
 			});
 			
-			$("#closeBtn").on("click", function() {
-				$("#banner").addClass("d-none");
+			$(".closeBtn").on("click", function() {
+				
 			});
-			
 			
 			// 좋아요 버튼
 			$(".like-btn").on("click", function(e) {

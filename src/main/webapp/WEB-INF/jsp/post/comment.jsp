@@ -24,21 +24,14 @@
 </head>
 <body>
 	
-	<c:import url="/WEB-INF/jsp/include/timeline-header.jsp"/>	
+	<c:import url="/WEB-INF/jsp/include/comment-header.jsp"/>	
 	
 	<div class="container d-flex justify-content-center">
 		<div class="col-3">
-			<div class="text-left mt-4">
-				<button class="btn btn-link" onclick="history.go(-1)">
-					<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="black" class="bi bi-chevron-left" viewBox="0 0 16 16">
-					  <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
-					</svg>
-				</button>
-			</div>
-			<!-- 이전 버튼 -->
+			
 		</div>	
 		<section class="contents d-flex flex-column align-items-center">
-		<div class="m-3 commentBox">
+		<div class="m-3 mt-2 commentBox">
 			<div class="h-50">
 				<span class="text-user-loginId mr-3"><b>${postDetail.user.loginId }</b></span>
 				<span class="text-post-contents">${postDetail.post.contents }</span>
@@ -50,9 +43,9 @@
 				<table class="table" border="0">
 				<c:forEach var="commentDetail" items="${postDetail.commentDetailList }">
 					<tr>
-						<th class="table-user-loginId"><h4>${commentDetail.user.loginId }</h4></th>
+						<th class="table-user-loginId"><h4 class="mr-3">${commentDetail.user.loginId }</h4></th>
 						<td class=""><h5>${commentDetail.comment.comment }</h5></td>
-						<td><h6><fmt:formatDate value="${commentDetail.comment.createdAt }" pattern="yyyy.MM.dd HH:mm:ss"/></h6></td>
+						<td><h6 class="text-right"><fmt:formatDate value="${commentDetail.comment.createdAt }" pattern="yyyy.MM.dd HH:mm:ss"/></h6></td>
 					</tr>
 				</c:forEach>
 				</table>

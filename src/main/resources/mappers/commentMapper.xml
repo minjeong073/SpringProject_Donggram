@@ -43,7 +43,7 @@
 		WHERE
 			`postId` = #{postId}
 		ORDER BY
-			`id` DESC
+			`id`
 	
 	</select>
 
