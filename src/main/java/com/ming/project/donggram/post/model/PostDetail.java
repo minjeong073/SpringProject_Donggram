@@ -33,11 +33,24 @@ public class PostDetail {
 	public void setCommentDetailList(List<CommentDetail> commentDetailList) {
 		this.commentDetailList = commentDetailList;
 	}
+	public int getLikeCount() {
+		return likeCount;
+	}
+	public void setLikeCount(int likeCount) {
+		this.likeCount = likeCount;
+	}
+	public boolean isLike() {
+		return isLike;
+	}
+	public void setLike(boolean isLike) {
+		this.isLike = isLike;
+	}
 	public List<LikeDetail> getLikeDetailList() {
 		return likeDetailList;
 	}
 	public void setLikeDetailList(List<LikeDetail> likeDetailList) {
 		this.likeDetailList = likeDetailList;
 	}
+	
 	
 }

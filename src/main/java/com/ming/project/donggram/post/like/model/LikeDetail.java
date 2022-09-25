@@ -4,22 +4,14 @@ import com.ming.project.donggram.user.model.User;
 
 public class LikeDetail {
 
-	private int likeCount;
-	private boolean isLike;
 	private Like like;
 	private User user;
-
-	public int getLikeCount() {
-		return likeCount;
+	
+	public Like getLike() {
+		return like;
 	}
-	public void setLikeCount(int likeCount) {
-		this.likeCount = likeCount;
-	}
-	public boolean isLike() {
-		return isLike;
-	}
-	public void setLike(boolean isLike) {
-		this.isLike = isLike;
+	public void setLike(Like like) {
+		this.like = like;
 	}
 	public User getUser() {
 		return user;
@@ -27,4 +19,6 @@ public class LikeDetail {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
+	
 }

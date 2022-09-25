@@ -36,31 +36,24 @@ public class LikeBO {
 		return likeDAO.selectCountLikeByUserId(userId, postId) != 0;
 	}
 	
-	public List<Like> getLikeList(int postId) {
-		return likeDAO.selectLikeList(postId);
-	}
 	
 	// + 좋아요 누른 사용자 정보 같이 가져오기
-	public List<LikeDetail> getLikeDetailList(int userId, int postId) {
-		
-		List<Like> likeList = likeDAO.selectLikeList(postId);
-		int likeCount = likeDAO.selectCountLike(postId);
-		boolean isLike = likeDAO.selectCountLikeByUserId(userId, postId) != 0;
+	public List<LikeDetail> getLikeDetailList(int postId) {
 		
 		List<LikeDetail> likeDetailList = new ArrayList<>();
 		
-		for (Like like : likeList) {
+		for(Like like : likeDAO.selectLikeList(postId)) {
 			User likeUser = userBO.getUserById(like.getUserId());
 			
 			LikeDetail likeDetail = new LikeDetail();
 			
 			likeDetail.setUser(likeUser);
+			likeDetail.setLike(like);
 			
 			likeDetailList.add(likeDetail);
 		}
 		
 		return likeDetailList;
-		
 	}
 
 	
