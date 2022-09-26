@@ -12,7 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class FileManagerService {
 	
-	public final static String FILE_UPLOAD_PATH = "D:\\minjeong\\spring\\sns\\upload";
+	// public final static String FILE_UPLOAD_PATH = "D:\\minjeong\\spring\\sns\\upload";
+	public final static String FILE_UPLOAD_PATH = "C:\\Users\\kimmj\\Desktop\\MegaIT\\Project\\Donggram_upload";
 	
 	// console 에 log 찍기
 	private static Logger logger = LoggerFactory.getLogger(FileManagerService.class);
@@ -56,4 +57,39 @@ public class FileManagerService {
 		return "/images" + directoryName + file.getOriginalFilename();
 	}
 
+	// file 삭제
+	public static boolean removeFile(String filePath) {
+		
+		if (filePath == null) {
+			return true;
+		}
+		
+		String realFilePath = FILE_UPLOAD_PATH + filePath.replace("/images", "");
+		
+		Path path = Paths.get(realFilePath);
+		
+		if (Files.exists(path)) {
+			try {
+				Files.delete(path);
+			} catch (IOException e) {
+				e.printStackTrace();
+				return false;
+			}
+		}
+		
+		// 파일 포함된 폴더 지우기
+		
+		path = path.getParent();
+		
+		if (Files.exists(path)) {
+			try {
+				Files.delete(path);
+			} catch (IOException e) {
+				e.printStackTrace();
+				return false;
+			}
+		}
+		
+		return true;
+	}
 }

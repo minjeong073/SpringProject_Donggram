@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ming.project.donggram.post.comment.dao.CommentDAO;
 import com.ming.project.donggram.post.comment.model.Comment;
@@ -24,6 +25,11 @@ public class CommentBO {
 	// 댓글 달기
 	public int addComment(int postId, int userId, String comment) {
 		return commentDAO.insertComment(postId, userId, comment);
+	}
+	
+	// 댓글 삭제하기
+	public int deleteComment(int postId, int commentId, int userId) {
+		return commentDAO.deleteComment(postId, commentId, userId);
 	}
 	
 	// 댓글 보기
@@ -46,5 +52,8 @@ public class CommentBO {
 		return commentDetailList;
 	}
 	
-	
+	// 해당하는 게시물 댓글 삭제하기
+	public int deleteCommentByPostId(@RequestParam("postId") int postId) {
+		return commentDAO.deleteCommentByPostId(postId);
+	}
 }

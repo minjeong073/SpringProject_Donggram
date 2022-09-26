@@ -26,6 +26,11 @@ public class LikeBO {
 		return likeDAO.insertLike(userId, postId);
 	}
 	
+	// 좋아요 취소
+	public int deleteLike(int userId, int postId) {
+		return likeDAO.deleteLike(userId, postId);
+	}
+	
 	// 게시글 별 좋아요 개수 얻는 기능
 	public int getLikeCount(int postId) {
 		return likeDAO.selectCountLike(postId);
@@ -56,5 +61,9 @@ public class LikeBO {
 		return likeDetailList;
 	}
 
+	// 해당 게시물의 좋아요 삭제
+	public int deleteLikeByPostId(int postId) {
+		return likeDAO.deleteLikeByPostId(postId);
+	}
 	
 }

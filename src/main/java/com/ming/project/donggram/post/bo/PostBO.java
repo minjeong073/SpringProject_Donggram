@@ -99,7 +99,36 @@ public class PostBO {
 		return postDAO.selectPostById(id);
 	}
 	
-	// 게시물 삭제
 	
+	// 게시물 수정
+	public int updatePost(int postId, String content) {
+		
+//		String imagePath = null;
+//		
+//		imagePath = FileManagerService.saveFile(userId, file)
+		return postDAO.updatePost(postId, content);
+	}
+	
+	// 게시물 삭제
+	public int deletePost(int postId, int userId) {
+		
+		Post post = postDAO.selectPostByIdAndUserId(postId, userId);
+
+		// userId 가 없는 경우 post 받아올 수 없음
+		if (post == null) {
+			return 0;
+		}
+		
+		// 파일 삭제
+		FileManagerService.removeFile(post.getImagePath());
+		
+		// 해당 게시물의 좋아요 삭제
+		likeBO.deleteLikeByPostId(postId);
+		
+		// 해당 게시물의 댓글 삭제
+		commentBO.deleteCommentByPostId(postId);
+		
+		return postDAO.deletePost(postId);
+	}
 	
 }

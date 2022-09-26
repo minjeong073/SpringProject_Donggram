@@ -36,12 +36,13 @@
 		</div><!-- 이전 버튼 -->
 		
 		<div class="text-center display-4 w-50">
-			새 게시물
+			게시물
 		</div>
 		
+		<!-- 수정 버튼 -->
 		<div class=" w-25">
 			<div class="text-center">
-				<button id="shareBtn" class="btn btn-link"><h3>공유</h3></button>
+				<button type="button" id="editBtn" class="btn btn-link" data-post-id="${post.id }"><h3>수정</h3></button>
 			</div>
 		</div>
 		
@@ -55,7 +56,7 @@
 				<div class="my-4">
 					<div id="postImgDiv" class="border d-flex justify-content-center align-items-center my-3">
 						<div>
-							<img id="preview" src="" class="w-100 h-100">
+							<img id="preview" src="${post.imagePath }" class="w-100 h-100">
 						</div>
 					</div>
 					
@@ -75,14 +76,31 @@
 			
 				<div class="my-4 col-11">				
 					<div id="postTextBox" class=" my-3">
-						<textarea id="contentInput" class="w-100 tagBox" rows="10" placeholder="문구 입력 ..."></textarea>
+						<textarea id="contentInput" class="w-100 tagBox" rows="20" placeholder="문구 입력 ...">
+${post.contents }
+						</textarea>
+					</div>
+					
+					<!-- 삭제 -->
+					<div class="text-right">
+						<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModalBtn">삭제</button>
 					</div>
 				</div>
-			
 				
 			</div><!-- postContent -->
-			
+
 		</section>
+		
+		<!-- Modal -->
+		<div class="modal fade" id="deleteModalBtn" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		  <div class="modal-dialog modal-dialog-centered" role="document">
+		    <div class="modal-content">
+		      <div class="modal-body">
+		        <button type="button" class="btn btn-danger btn-block" id="deleteBtn" data-post-id=${post.id }>삭제하기</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
 		
 	</div>
 	
@@ -90,17 +108,40 @@
 	
 		$(document).ready(function() {
 			
-			$("#shareBtn").on("click", function() {
+			$("#deleteBtn").on("click", function() {
 				
+				let postId = $(this).data("post-id");
+				
+				$.ajax({
+					type:"get"
+					, url:"/post/delete"
+					, data:{"postId":postId}
+					, success:function(data) {
+						if (data.result == "success") {
+							alert("삭제되었습니다");
+							location.href = "/post/timeline/view";
+						} else {
+							alert("삭제 실패");
+						}
+					}
+					, error:function() {
+						alert("삭제 에러");
+					}
+				});
+			});
+			
+			$("#editBtn").on("click", function() {
+				
+				let postId = $(this).data("post-id");
 				let content = $("#contentInput").val();
 				
 				// validation
 				
 				// file 에 대한 validation
-				if ($("#fileInput")[0].files.length == 0) {
+				/* if ($("#fileInput")[0].files.length == 0) {
 					alert("사진을 추가하세요");
 					return ;
-				}
+				} */
 				
 				if (content == "") {
 					alert("게시물 내용을 입력하세요");
@@ -108,14 +149,14 @@
 				}
 				
 				var formData = new FormData();
+				formData.append("postId", postId);
 				formData.append("content", content);
-				// 파일 하나만 (나중에 여러개 업로드 수정)
-				formData.append("file", $("#fileInput")[0].files[0]);
+				// formData.append("file", $("#fileInput")[0].files[0]);
 				
 				
 				$.ajax({
 					type:"post"
-					, url:"/post/create"
+					, url:"/post/detail/update"
 					, data:formData
 					, enctype:"multipart/form-data"
 					, processData:false
@@ -124,11 +165,11 @@
 						if (data.result == "success") {
 							location.href = "/post/timeline/view";
 						} else {
-							alert("게시물 공유 실패");
+							alert("게시물 수정 실패");
 						}
 					}
 					, error:function() {
-						alert("게시물 공유 에러");
+						alert("게시물 수정 에러");
 					}
 				});
 			});

@@ -23,6 +23,16 @@
 		)
 	
 	</insert>
+
+	<delete id="deleteLike" parameterType="map">
+		
+		DELETE FROM
+			`like`
+		WHERE
+			`userId` = #{userId}
+			AND `postId` = #{postId}
+		
+	</delete>	
 	
 	<!-- 좋아요 개수 세기 -->
 	<select id="selectCountLike" parameterType="int" resultType="int">
@@ -65,4 +75,12 @@
 		
 	</select>
 	
+	<delete id="deleteLikeByPostId" parameterType="int">
+		
+		DELETE FROM
+			`like`
+		WHERE
+			`postId` = #{postId}
+		
+	</delete>
 </mapper>

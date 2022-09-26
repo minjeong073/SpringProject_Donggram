@@ -57,7 +57,26 @@
 		FROM
 			`post`
 		WHERE
-			`id` = #{id}
+			`id` = #{postId}
+	
+	</select>
+	
+	<!-- 게시물 보기 (postId, userId) -->
+	<select id="selectPostByIdAndUserId" parameterType="map"
+	resultType="com.ming.project.donggram.post.model.Post">
+	
+		SELECT
+			`id`
+			, `userId`
+			, `imagePath`
+			, `contents`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`post`
+		WHERE
+			`id` = #{postId}
+			AND `userId` = #{userId}
 	
 	</select>
 	
@@ -75,9 +94,27 @@
 			`post`
 		ORDER BY
 			`id` DESC
-		
-		
 	</select>
 	
+	<update id="updatePost" parameterType="map">
+	
+		UPDATE
+			`post`
+		SET
+			`contents` = #{content}
+			, `updatedAt` = now()
+		WHERE
+			`id` = #{postId}
+
+	</update>	
+	
+	<delete id="deletePost" parameterType="int">
+		
+		DELETE FROM
+			`post`
+		WHERE
+			`id` = #{postId}
+			
+	</delete>
 	
 </mapper>

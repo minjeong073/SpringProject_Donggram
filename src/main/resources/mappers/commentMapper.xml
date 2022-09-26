@@ -27,6 +27,17 @@
 		)
 		
 	</insert>
+	
+	<delete id="deleteComment" parameterType="map">
+	
+		DELETE FROM
+			`comment`
+		WHERE
+			`postId` = #{postId}
+			AND `id` = #{commentId}
+			AND `userId` = #{userId}
+		
+	</delete>
 
 	<select id="selectCommentList" parameterType="int" 
 	resultType="com.ming.project.donggram.post.comment.model.Comment">
@@ -46,5 +57,14 @@
 			`id`
 	
 	</select>
+	
+	<delete id="deleteCommentByPostId" parameterType="int">
+	
+		DELETE FROM
+			`comment`
+		WHERE
+			`postId` = #{postId}
+		
+	</delete>
 
 </mapper>
