@@ -21,6 +21,8 @@ public interface PostDAO {
 	
 	public Post selectPostById(@Param("postId") int postId);
 	
+	public List<Post> selectPostByUserId(@Param("userId") int userId);
+	
 	public Post selectPostByIdAndUserId(
 			@Param("postId") int postId
 			, @Param("userId") int userId);

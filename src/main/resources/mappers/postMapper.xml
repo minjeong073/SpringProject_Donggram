@@ -61,6 +61,24 @@
 	
 	</select>
 	
+	<!-- 게시물 보기 (userId) -->
+	<select id="selectPostByUserId" parameterType="int"
+	resultType="com.ming.project.donggram.post.model.Post">
+	
+		SELECT
+			`id`
+			, `userId`
+			, `imagePath`
+			, `contents`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`post`
+		WHERE
+			`userId` = #{userId}
+		
+	</select>
+	
 	<!-- 게시물 보기 (postId, userId) -->
 	<select id="selectPostByIdAndUserId" parameterType="map"
 	resultType="com.ming.project.donggram.post.model.Post">

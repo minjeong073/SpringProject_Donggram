@@ -29,7 +29,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(interceptor)
 		.addPathPatterns("/**")
-		.excludePathPatterns("/static/**", "/images/**", "/user/signout");
+		.excludePathPatterns("/static/**", "/images/**", "/user/signout", "/user/feed/**");
 	}
 
 }

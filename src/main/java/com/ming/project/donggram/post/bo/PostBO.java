@@ -99,6 +99,10 @@ public class PostBO {
 		return postDAO.selectPostById(id);
 	}
 	
+	// 사용자 아이디로 게시물 불러오기
+	public List<Post> getPostByUserId(int userId) {
+		return postDAO.selectPostByUserId(userId);
+	}
 	
 	// 게시물 수정
 	public int updatePost(int postId, String content) {

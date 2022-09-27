@@ -39,12 +39,19 @@
 			게시물
 		</div>
 		
-		<!-- 수정 버튼 -->
-		<div class=" w-25">
-			<div class="text-center">
-				<button type="button" id="editBtn" class="btn btn-link" data-post-id="${post.id }"><h3>수정</h3></button>
-			</div>
-		</div>
+		<c:choose>
+			<c:when test="${post.userId eq userId }">
+				<!-- 수정 버튼 -->
+				<div class=" w-25">
+					<div class="text-center">
+						<button type="button" id="editBtn" class="btn btn-link" data-post-id="${post.id }"><h3>수정</h3></button>
+					</div>
+				</div>
+			</c:when>
+			<c:otherwise>
+				<div class=" w-25"></div>
+			</c:otherwise>
+		</c:choose>
 		
 	</header>
 	
@@ -81,10 +88,17 @@ ${post.contents }
 						</textarea>
 					</div>
 					
-					<!-- 삭제 -->
-					<div class="text-right">
-						<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModalBtn">삭제</button>
-					</div>
+					<c:choose>
+						<c:when test="${post.userId eq userId }">
+							<!-- 삭제 -->
+							<div class="text-right">
+								<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModalBtn">삭제</button>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div></div>
+						</c:otherwise>
+					</c:choose>
 				</div>
 				
 			</div><!-- postContent -->

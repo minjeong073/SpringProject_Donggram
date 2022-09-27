@@ -32,7 +32,7 @@
 			<div>
 				<c:forEach var="postDetail" items="${postDetailList }">
 				
-				<div id="feed" class="feed border m-3" value="${postDetail.post.id }">
+				<div id="feed" class="feed border m-3">
 				
 					<div class="user-info-box border d-flex align-items-center">
 

@@ -3,6 +3,8 @@
     
 <!-- jstl core library -->    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!-- jstl function library -->
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html>
@@ -21,35 +23,54 @@
 
 </head>
 <body>
-	<c:import url="/WEB-INF/jsp/include/timeline-header.jsp"/>
+	<c:import url="/WEB-INF/jsp/include/comment-header.jsp"/>
+		
+	<div class="container d-flex flex-column align-items-center ">
 	
-	<div class="container d-flex flex-column align-items-center bg-warning">
-		<section class="contents bg-info">
-			<div class="m-3">
-				<div class="bg-danger d-flex justify-content-around ">
-					<div>
-						<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+		<section class=" w-75 d-flex justify-content-center mt-5 mb-3">
+			<div class="m-3 ">
+				
+				<div class=" d-flex justify-content-around mt-4 mb-3">
+					<div class="m-1">
+						<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
 						  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
 						  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
 						</svg>
 					</div>
+					
 					<div>
 						<div class="d-flex">
-							<div>username</div>
-							<div>post count</div>
-							<div>편집</div>
+							<div class=""><h4>${user.loginId }</h4></div>
+							<!-- <div><button type="button" class="btn btn-sm btn-secondary">프로필 편집</button></div> -->
 						</div>
-						<div>
-							소개
-						</div>
+						<div>게시물 ${fn:length(postList) }</div>						
+					</div>
+					
+					<div class="col-2">
+					</div>
+					
+				</div>
+				
+				<hr>
+				<div class="d-flex ">
+					<div class="d-flex ml-5 mt-3 flex-wrap">
+					
+						<c:forEach var="post" items="${postList }">
+							<div style="width: 200px; height: 200px;" class="border m-2 d-flex  align-items-center">
+								<div class="d-flex justify-content-center ">
+									<a href="/post/detail/view?id=${post.id }"><img src="${post.imagePath }" width="198"></a>
+								</div>
+							</div>
+						</c:forEach>
+						
 					</div>
 				</div>
 				
-				<div>
-					post list
-				</div>
 			</div>
 		</section>
+
+		<c:import url="/WEB-INF/jsp/include/footer.jsp" />
+
 	</div>
 	
 </body>

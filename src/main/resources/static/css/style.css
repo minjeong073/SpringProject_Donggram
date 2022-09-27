@@ -62,6 +62,7 @@ section
 
 .contents > .feed {
 	width: 700px;
+	height: auto;
 }
 
 .feed > .user-info-box {
@@ -82,7 +83,6 @@ section
 
 .feed > .feed-info-box {
 	width: 700px;
-	height: 220px;
 }
 
 .textMoreBtn:hover {
